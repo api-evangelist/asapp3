@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/asapp3/main/json-schema/asapp3-article-schema.json",
+  "title": "Article",
+  "description": "An article stored within the Knowledge Base.",
+  "x-generated": "2026-09-26",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/asapp3-openapi.yaml#/components/schemas/Article",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for the article."
+    },
+    "title": {
+      "type": "string",
+      "description": "The refined title of the article, resulting from the cleanup process."
+    },
+    "content": {
+      "type": "string",
+      "description": "The refined content of the article, resulting from the cleanup process."
+    },
+    "url": {
+      "type": "string",
+      "description": "The reference URL of the article. Defaults to null if not provided."
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp indicating when the article was last updated. This field is null if the initial submission is still pending review."
+    },
+    "updatedBy": {
+      "type": "string",
+      "description": "The email address of the user who last updated the article. This field is null if the initial submission is still pending review."
+    },
+    "metadata": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Metadata"
+      },
+      "description": "Additional key-value pairs related to the article."
+    },
+    "originalContent": {
+      "type": "string",
+      "description": "The original content of the article prior to the cleanup process."
+    },
+    "originalTitle": {
+      "type": "string",
+      "description": "The original title of the article prior to the cleanup process."
+    },
+    "queryExamples": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Examples of customer questions related to the article. Defaults to an empty array if not provided."
+    },
+    "additionalInstructions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/AdditionalInstruction"
+      },
+      "description": "Specific instructions to ensure responses are relevant and address exceptions."
+    },
+    "pendingSubmissionId": {
+      "type": "string",
+      "description": "The unique identifier for the submission currently under review for this article. This field is null if there are no pending submissions."
+    },
+    "currentVersion": {
+      "type": "string",
+      "description": "The current version label of the article. This field is null if the initial submission is still pending review."
+    },
+    "deploymentStatus": {
+      "$ref": "#/$defs/DeploymentStatus",
+      "description": "The current deployment status of the article."
+    }
+  },
+  "$defs": {
+    "AdditionalInstruction": {
+      "description": "Guidelines and responses to enhance the article.",
+      "type": "object",
+      "properties": {
+        "clarificationInstruction": {
+          "type": "string",
+          "description": "A guideline to improve the article's content."
+        },
+        "exampleResponse": {
+          "type": "string",
+          "description": "A sample response applicable if the clarification instruction is followed."
+        }
+      }
+    },
+    "DeploymentStatus": {
+      "description": "The current deployment status of the article.",
+      "type": "string",
+      "enum": [
+        "NONE",
+        "DRAFT",
+        "SANDBOX",
+        "PRODUCTION",
+        "SANDBOX_AND_PRODUCTION"
+      ]
+    },
+    "Metadata": {
+      "description": "A key-value pair providing additional information about the article.",
+      "type": "object",
+      "required": [
+        "key",
+        "value"
+      ],
+      "properties": {
+        "key": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The key for the metadata entry."
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The value for the metadata entry."
+        }
+      }
+    }
+  }
+}

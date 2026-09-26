@@ -1,0 +1,223 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/asapp3/main/json-schema/asapp3-conversation-metadata-schema.json",
+  "title": "ConversationMetadata",
+  "description": "A set of conversation metadata attributes",
+  "x-generated": "2026-09-26",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/asapp3-openapi.yaml#/components/schemas/ConversationMetadata",
+  "type": "object",
+  "properties": {
+    "externalConversationId": {
+      "description": "Conversation ID from the external chat / voice system",
+      "type": "string",
+      "pattern": "[a-zA-Z0-9\\-\\_]+",
+      "maxLength": 256
+    },
+    "eventId": {
+      "description": "An event id used to track the submission; if none is provided, service will generate one\n",
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "[a-zA-Z0-9\\-\\_]+",
+      "maxLength": 256
+    },
+    "lobId": {
+      "description": "The line of business id",
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "[a-zA-Z0-9\\-\\_]+",
+      "maxLength": 256
+    },
+    "lobName": {
+      "description": "The descriptive name of the line of business",
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 256
+    },
+    "groupId": {
+      "description": "The group id of which the agent belong to",
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "[a-zA-Z0-9\\-\\_]+",
+      "maxLength": 256
+    },
+    "groupName": {
+      "description": "The descriptive name of the group",
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 256
+    },
+    "agentRoutingCode": {
+      "description": "The agent's routing attribute",
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "[a-zA-Z0-9\\-\\_]+",
+      "maxLength": 256
+    },
+    "campaign": {
+      "description": "The activities related to the issue",
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "[a-zA-Z0-9\\-\\_]+",
+      "maxLength": 256
+    },
+    "deviceType": {
+      "description": "The client's device type",
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "TABLET",
+        "PHONE",
+        "DESKTOP",
+        "WATCH",
+        "OTHER"
+      ]
+    },
+    "platform": {
+      "description": "The client's platform type\nWAB: WhatsApp Business\n",
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "SMS",
+        "WEB",
+        "IOS",
+        "ANDROID",
+        "APP",
+        "LOCAL",
+        "VOICE",
+        "VOICE_IOS",
+        "VOICE_ANDROID",
+        "VOICE_ECHO",
+        "VOICE_HOMEPOD",
+        "VOICE_GGLHOME",
+        "VOICE_WEB",
+        "APPLEBIZ",
+        "GOOGLEBIZ",
+        "GBM",
+        "WAB"
+      ]
+    },
+    "companySegment": {
+      "description": "The company's segment of which the issue belongs to",
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string",
+        "pattern": "[a-zA-Z0-9\\-\\_]+",
+        "maxLength": 64
+      }
+    },
+    "companySubdivision": {
+      "description": "The company's subdivision of which the issue belongs to",
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "[a-zA-Z0-9\\-\\_]+",
+      "maxLength": 256
+    },
+    "businessRule": {
+      "description": "The business rule to use",
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 256
+    },
+    "entryType": {
+      "description": "The way the issue started and created in the system",
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "[a-zA-Z0-9\\-\\_]+",
+      "maxLength": 256
+    },
+    "operatingSystem": {
+      "description": "The operating system used to enter the issue",
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "MAC_OS",
+        "LINUX",
+        "WINDOWS",
+        "ANDROID",
+        "IOS",
+        "OTHER"
+      ]
+    },
+    "browserType": {
+      "description": "The browser type used",
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "[a-zA-Z0-9\\-\\_]+",
+      "maxLength": 64
+    },
+    "browserVersion": {
+      "description": "The browser version used",
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "[a-zA-Z0-9\\-\\_\\.]+",
+      "maxLength": 16
+    },
+    "attributes": {
+      "description": "A map of key-value pairs for extra metadata attributes",
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/Attribute"
+      },
+      "maxItems": 10
+    }
+  },
+  "required": [
+    "externalConversationId"
+  ],
+  "$defs": {
+    "Attribute": {
+      "description": "A key-value pair of additional metadata attributes",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the attribute",
+          "type": "string",
+          "maxLength": 256
+        },
+        "value": {
+          "description": "The value of the named attribute",
+          "type": "string",
+          "maxLength": 1024
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+generated: '2026-09-26'
+method: searched
+generator: extract-docs-artifacts.py (local)
+source: https://docs.asapp.com/security.md
+sources:
+- https://docs.asapp.com/security.md
+- https://docs.asapp.com/security/data-redaction.md
+- https://docs.asapp.com/security/external-ip-blocking.md
+- https://docs.asapp.com/security/warning-about-customerinfo-and-sensitive-data.md
+standards:
+- id: soc2
+  conforms: true
+  evidence: Security is a critical aspect of any platform, and ASAPP takes it seriously, being SOC2 and PCI compliant.
+- id: pci-dss
+  conforms: true
+  evidence: Security is a critical aspect of any platform, and ASAPP takes it seriously, being SOC2 and PCI compliant.
+- id: openapi-3.0
+  conforms: true
+  evidence: the document declares 3.0.1
+- id: oauth2
+  conforms: false
+  evidence: 'securitySchemes: API-ID (apiKey), API-Secret (apiKey)'
+- id: rfc9457
+  conforms: false
+  evidence: no response declares application/problem+json
+- id: idempotency
+  conforms: false
+  evidence: no idempotency key parameter on mutating operations
+docs: https://docs.asapp.com/security.md

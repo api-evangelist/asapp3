@@ -1,23 +1,318 @@
 aid: asapp3
 name: Asapp3
-description: 'Asapp3 is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+image: https://cdn.prod.website-files.com/6436aca7069acc764910d397/685d7d32c1b63f6563bf2fd7_Primary%20Opengraph.png
+description: ASAPP (formerly Asapp3) is a leading AI‑powered customer experience platform for enterprise contact centers. It provides generative
+  AI agents, human‑in‑the‑loop workflows, and real‑time interaction intelligence to automate and augment customer service across voice, digital
+  and human channels. The platform integrates with existing systems, offers safety and security guardrails, and is backed by extensive AI research
+  and patents, serving industries such as finance, healthcare, retail, and telecommunications.
 url: https://raw.githubusercontent.com/api-evangelist/asapp3/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
+x-tier: profiled
+x-tier-reason: enrichment pass 2026-09-26 (modular-v1; was harvest)
 specificationVersion: '0.20'
 created: '2026-09-26'
 modified: '2026-09-26'
 tags:
+- AI
+- CustomerExperience
+- Enterprise
+- ContactCenter
+- Platform
 - Company
-apis: []
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: AgenticAccess
+  url: agentic-access/asapp3-agentic-access.yml
+- type: RateLimits
+  url: rate-limits/asapp3-rate-limits.yml
+- type: Spectral
+  url: rules/asapp3-rules.yml
+- type: JSONLD
+  url: json-ld/asapp3-context.jsonld
+- type: Vocabulary
+  url: vocabulary/asapp3-vocabulary.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Webhooks
+  url: asyncapi/asapp3-webhooks.yml
+- type: DataModel
+  url: data-model/asapp3-data-model.yml
+- type: Compliance
+  url: https://trust.asapp.com/
+- type: Authentication
+  url: authentication/asapp3-authentication.yml
+- type: ErrorCatalog
+  url: errors/asapp3-problem-types.yml
+- type: Conformance
+  url: conformance/asapp3-conformance.yml
+- type: LLMsTxt
+  url: llms/asapp3-llms.txt
+- type: AgentCard
+  url: a2a/asapp3-a2a.yml
+- type: SecurityTxt
+  url: well-known/asapp3-status-security.txt
+- type: WellKnown
+  url: well-known/asapp3-well-known.yml
+- type: Hosts
+  url: hosts/asapp3-hosts.yml
+- type: Vendors
+  url: vendors/asapp3-vendors.yml
+- type: Support
+  url: https://support.asapp.com/hc/en-us
+- type: StatusPage
+  url: https://status.asapp.com/access/login
+- type: PrivacyPolicy
+  url: https://www.asapp.com/privacy-policy
+- type: Newsroom
+  url: https://www.asapp.com/news
+- type: GitHubOrganization
+  url: https://github.com/asappinc
+- type: ChangeLog
+  url: https://docs.asapp.com/releases/overview
+- type: Blog
+  url: https://www.asapp.com/blog
+- type: GettingStarted
+  url: https://docs.asapp.com/generativeagent/getting-started
+- type: Documentation
+  url: https://developer.asapp.com/
+- type: APIReference
+  url: https://docs.asapp.com/llms.txt
+- type: TrustCenter
+  url: security/asapp3-trust-center.yml
+- type: DomainSecurity
+  url: security/asapp3-domain-security.yml
 - type: Website
-  url: https://equityzen.com/company/asapp3
+  url: https://www.asapp.com
+apis:
+- aid: asapp3:asapp3-autocompose-api
+  name: Asapp3 Auto Compose API
+  description: Improve agent productivity with AutoCompose API
+  humanURL: https://docs.asapp.com/apis/overview
+  baseURL: https://api.sandbox.asapp.com
+  tags:
+  - AutoCompose
+  properties:
+  - type: OpenAPI
+    url: openapi/asapp3-autocompose-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/asapp3-message-sent-event-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-article-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-agent-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-conversation-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-message-analytic-event-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-submission-request-schema.json
+- aid: asapp3:asapp3-autosummary-api
+  name: Asapp3 Auto Summary API
+  description: Endpoints for summarizing conversations and retrieving structured data
+  humanURL: https://docs.asapp.com/apis/overview
+  baseURL: https://api.sandbox.asapp.com
+  tags:
+  - AutoSummary
+  properties:
+  - type: OpenAPI
+    url: openapi/asapp3-autosummary-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/asapp3-message-sent-event-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-article-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-agent-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-conversation-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-message-analytic-event-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-submission-request-schema.json
+- aid: asapp3:asapp3-autotranscribe-api
+  name: Asapp3 Auto Transcribe API
+  description: Get streaming URL to transcribe audio
+  humanURL: https://docs.asapp.com/apis/overview
+  baseURL: https://api.sandbox.asapp.com
+  tags:
+  - AutoTranscribe
+  properties:
+  - type: OpenAPI
+    url: openapi/asapp3-autotranscribe-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/asapp3-message-sent-event-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-article-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-agent-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-conversation-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-message-analytic-event-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-submission-request-schema.json
+- aid: asapp3:asapp3-autotranscribe-media-gateway-api
+  name: Asapp3 AutoTranscribe Media Gateway API
+  description: Operations for controlling AutoTranscribe Media Gateway transcription and streaming
+  humanURL: https://docs.asapp.com/apis/overview
+  baseURL: https://api.sandbox.asapp.com
+  tags:
+  - AutoTranscribe Media Gateway
+  properties:
+  - type: OpenAPI
+    url: openapi/asapp3-autotranscribe-media-gateway-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/asapp3-message-sent-event-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-article-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-agent-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-conversation-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-message-analytic-event-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-submission-request-schema.json
+- aid: asapp3:asapp3-conversations-api
+  name: Asapp3 Conversations API
+  description: Operations to send conversational inputs to ASAPP AI services
+  humanURL: https://docs.asapp.com/apis/overview
+  baseURL: https://api.sandbox.asapp.com
+  tags:
+  - Conversations
+  properties:
+  - type: OpenAPI
+    url: openapi/asapp3-conversations-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/asapp3-message-sent-event-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-article-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-agent-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-conversation-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-message-analytic-event-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-submission-request-schema.json
+- aid: asapp3:asapp3-file-exporter-api
+  name: Asapp3 File Exporter API
+  description: API to get client exports
+  humanURL: https://docs.asapp.com/apis/overview
+  baseURL: https://api.sandbox.asapp.com
+  tags:
+  - File Exporter
+  properties:
+  - type: OpenAPI
+    url: openapi/asapp3-file-exporter-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/asapp3-message-sent-event-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-article-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-agent-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-conversation-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-message-analytic-event-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-submission-request-schema.json
+- aid: asapp3:asapp3-generativeagent-api
+  name: Asapp3 Generative Agent API
+  description: >-
+    Operations to send messages and trigger GenerativeAgent to respond or query the current state
+  humanURL: https://docs.asapp.com/apis/overview
+  baseURL: https://api.sandbox.asapp.com
+  tags:
+  - GenerativeAgent
+  properties:
+  - type: OpenAPI
+    url: openapi/asapp3-generativeagent-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/asapp3-message-sent-event-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-article-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-agent-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-conversation-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-message-analytic-event-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-submission-request-schema.json
+- aid: asapp3:asapp3-health-check-api
+  name: Asapp3 Health Check API
+  description: Operations to ensure that ASAPP APIs are up and running.
+  humanURL: https://docs.asapp.com/apis/overview
+  baseURL: https://api.sandbox.asapp.com
+  tags:
+  - Health Check
+  properties:
+  - type: OpenAPI
+    url: openapi/asapp3-health-check-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/asapp3-message-sent-event-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-article-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-agent-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-conversation-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-message-analytic-event-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-submission-request-schema.json
+- aid: asapp3:asapp3-knowledge-base-api
+  name: Asapp3 Knowledge Base API
+  description: Operations to submit and retrieve Articles to the GenerativeAgent Knowledge Base.
+  humanURL: https://docs.asapp.com/apis/overview
+  baseURL: https://api.sandbox.asapp.com
+  tags:
+  - Knowledge Base
+  properties:
+  - type: OpenAPI
+    url: openapi/asapp3-knowledge-base-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/asapp3-message-sent-event-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-article-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-agent-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-conversation-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-message-analytic-event-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-submission-request-schema.json
+- aid: asapp3:asapp3-metadata-api
+  name: Asapp3 Metadata API
+  description: API to submit entity's attributes to ASAPP
+  humanURL: https://docs.asapp.com/apis/overview
+  baseURL: https://api.sandbox.asapp.com
+  tags:
+  - Metadata
+  properties:
+  - type: OpenAPI
+    url: openapi/asapp3-metadata-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/asapp3-message-sent-event-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-article-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-agent-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-conversation-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-message-analytic-event-schema.json
+  - type: JSONSchema
+    url: json-schema/asapp3-submission-request-schema.json
+x-enrichment:
+  date: '2026-09-26'
+  status: enriched
+  artifacts_added: 36
+  pass: modular-v1
+  engine: identity=local,contract=local,surfaces=local,docs=local

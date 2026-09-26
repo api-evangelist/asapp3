@@ -1,0 +1,23 @@
+generated: 2026-09-26
+method: searched
+source: https://docs.asapp.com/getting-started/developers/rate-limits.md
+name: Asapp3 API Rate Limits
+limits:
+  - name: global
+    scope: global
+    window: second
+    limit: 100
+    limit_text: "100 requests per second"
+    kind: burst
+    endpoint: "*"
+    plan: null
+    notes: "Spike arrest limit"
+  - name: daily
+    scope: daily
+    window: day
+    limit: null
+    limit_text: "daily limits result in 429 Too Many Requests for the remainder of the day"
+    kind: null
+    endpoint: "*"
+    plan: null
+    notes: "Behavior when daily limit reached"

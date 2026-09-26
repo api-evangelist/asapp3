@@ -1,0 +1,21 @@
+generated: '2026-09-26'
+method: searched
+generator: extract-docs-artifacts.py (local)
+source: https://docs.asapp.com/generativeagent/integrate/web-sdk/web-authentication.md
+sources:
+- https://docs.asapp.com/generativeagent/integrate/web-sdk/web-authentication.md
+- https://docs.asapp.com/generativeagent/configuring/connect-apis/authentication-methods.md
+- https://docs.asapp.com/agent-desk/integrations/android-sdk/user-authentication.md
+- https://docs.asapp.com/agent-desk/integrations/customer-authentication.md
+description: Authentication methods documented for ASAPP web SDK, API connections, and mobile SDKs.
+schemes:
+- type: apiKey
+  name: Custom Header Authentication
+  evidence: Custom headers add authentication data to API requests via HTTP headers. Common implementations include API keys and bearer tokens.
+  how_to_obtain: Configure a header name (e.g., "Authorization" or "X-API-Key") and a static or dynamic header value in the API connection settings.
+- type: other
+  name: Android SDK – Request Context Provider
+  evidence: The request context provider is a function that returns a map with keys and values agreed upon with ASAPP.
+  how_to_obtain: Implement ASAPPRequestContextProvider that returns an Auth map containing a Token.
+docs: https://docs.asapp.com/generativeagent/integrate/web-sdk/web-authentication.md
+note: 4 extracted row(s) were dropped because their quote was not on the page.

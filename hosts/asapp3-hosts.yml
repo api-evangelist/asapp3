@@ -1,0 +1,165 @@
+generated: '2026-09-26'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 11
+  own: 10
+  other_domain: 0
+  platform: 1
+  roles:
+  - api
+  - docs
+  - other
+  - source
+  - status
+  - support
+  - website
+hosts:
+- host: ai-console.asapp.com
+  found_by:
+  - probed
+  - site-links
+  - contract-discovery
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: asapp.com
+  role: other
+  relation: own
+- host: api.asapp.com
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: asapp.com
+  role: api
+  relation: own
+- host: api.sandbox.asapp.com
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - api
+  registrable_domain: asapp.com
+  role: api
+  relation: own
+- host: developer.asapp.com
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - docs-index
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types:
+  - Documentation
+  serves:
+  - docs
+  - cdn
+  vendor: cloudflare
+  registrable_domain: asapp.com
+  role: docs
+  relation: own
+- host: docs-sdk.asapp.com
+  found_by:
+  - docs-index
+  types: []
+  serves:
+  - docs
+  registrable_domain: asapp.com
+  role: other
+  relation: own
+- host: docs.asapp.com
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - site-links
+  - namespace-probe
+  - docs-index
+  - spec-found
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types:
+  - ChangeLog
+  - GettingStarted
+  - APIReference
+  serves:
+  - docs
+  - spec
+  - hosting
+  title: Welcome to ASAPP - ASAPP Docs
+  status: 200
+  vendor: vercel
+  registrable_domain: asapp.com
+  role: docs
+  relation: own
+- host: github.com
+  found_by:
+  - pointer
+  types:
+  - GitHubOrganization
+  serves: []
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: status.asapp.com
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - well-known
+  types:
+  - StatusPage
+  serves: []
+  registrable_domain: asapp.com
+  role: status
+  relation: own
+- host: support.asapp.com
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - well-known
+  - vendor-detect
+  types:
+  - Support
+  serves:
+  - support
+  vendor: zendesk
+  registrable_domain: asapp.com
+  role: support
+  relation: own
+- host: trust.asapp.com
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - well-known
+  types:
+  - Compliance
+  serves: []
+  platform: app.safebase.io
+  registrable_domain: asapp.com
+  role: other
+  relation: own
+- host: www.asapp.com
+  found_by:
+  - pointer
+  - probed
+  - docs-index
+  - contract-discovery
+  - well-known
+  types:
+  - PrivacyPolicy
+  - Newsroom
+  - Blog
+  - Website
+  serves:
+  - docs
+  registrable_domain: asapp.com
+  role: website
+  relation: own

@@ -1,0 +1,819 @@
+{
+  "@context": {
+    "@vocab": "https://asapp.com/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "asapp3": "https://asapp.com/schema#",
+    "Suggestion": "asapp3:Suggestion",
+    "text": {
+      "@id": "asapp3:text",
+      "@type": "xsd:string"
+    },
+    "templateText": {
+      "@id": "asapp3:templateText",
+      "@type": "xsd:string"
+    },
+    "title": {
+      "@id": "asapp3:title",
+      "@type": "xsd:string"
+    },
+    "PhraseCompletion": "asapp3:PhraseCompletion",
+    "AutopilotMessage": "asapp3:AutopilotMessage",
+    "delaySeconds": {
+      "@id": "asapp3:delaySeconds",
+      "@type": "xsd:integer"
+    },
+    "triggerAfterSeconds": {
+      "@id": "asapp3:triggerAfterSeconds",
+      "@type": "xsd:integer"
+    },
+    "Suggestions": "asapp3:Suggestions",
+    "id": {
+      "@id": "asapp3:id",
+      "@type": "xsd:string"
+    },
+    "message": {
+      "@id": "asapp3:message",
+      "@type": "@id"
+    },
+    "suggestions": {
+      "@id": "asapp3:suggestions",
+      "@container": "@list"
+    },
+    "phraseCompletion": {
+      "@id": "asapp3:phraseCompletion",
+      "@type": "@id"
+    },
+    "autopilotMessage": {
+      "@id": "asapp3:autopilotMessage",
+      "@type": "@id"
+    },
+    "ProfanityResult": "asapp3:ProfanityResult",
+    "hasProfanity": {
+      "@id": "asapp3:hasProfanity",
+      "@type": "xsd:boolean"
+    },
+    "SpellcheckQuery": "asapp3:SpellcheckQuery",
+    "typingEvent": {
+      "@id": "asapp3:typingEvent"
+    },
+    "userDictionary": {
+      "@id": "asapp3:userDictionary",
+      "@container": "@list"
+    },
+    "SpellcheckCorrection": "asapp3:SpellcheckCorrection",
+    "misspelledText": {
+      "@id": "asapp3:misspelledText",
+      "@type": "xsd:string"
+    },
+    "correctedText": {
+      "@id": "asapp3:correctedText",
+      "@type": "xsd:string"
+    },
+    "position": {
+      "@id": "asapp3:position",
+      "@type": "xsd:integer"
+    },
+    "MessageSentEvent": "asapp3:MessageSentEvent",
+    "conversationId": {
+      "@id": "asapp3:conversationId",
+      "@type": "xsd:string"
+    },
+    "messageId": {
+      "@id": "asapp3:messageId",
+      "@type": "xsd:string"
+    },
+    "augmentationType": {
+      "@id": "asapp3:augmentationType",
+      "@container": "@list"
+    },
+    "numEdits": {
+      "@id": "asapp3:numEdits",
+      "@type": "xsd:integer"
+    },
+    "selectedSuggestionText": {
+      "@id": "asapp3:selectedSuggestionText",
+      "@type": "xsd:string"
+    },
+    "selectedSuggestionsId": {
+      "@id": "asapp3:selectedSuggestionsId",
+      "@type": "xsd:string"
+    },
+    "selectedSuggestionIndex": {
+      "@id": "asapp3:selectedSuggestionIndex",
+      "@type": "xsd:integer"
+    },
+    "initialSuggestionsId": {
+      "@id": "asapp3:initialSuggestionsId",
+      "@type": "xsd:string"
+    },
+    "timeToAction": {
+      "@id": "asapp3:timeToAction",
+      "@type": "xsd:decimal"
+    },
+    "craftingTime": {
+      "@id": "asapp3:craftingTime",
+      "@type": "xsd:decimal"
+    },
+    "dwellTime": {
+      "@id": "asapp3:dwellTime",
+      "@type": "xsd:decimal"
+    },
+    "phraseAutocompletePresentedCt": {
+      "@id": "asapp3:phraseAutocompletePresentedCt",
+      "@type": "xsd:integer"
+    },
+    "phraseAutocompleteSelectedCt": {
+      "@id": "asapp3:phraseAutocompleteSelectedCt",
+      "@type": "xsd:integer"
+    },
+    "MessageAnalyticEvent": "asapp3:MessageAnalyticEvent",
+    "type": {
+      "@id": "asapp3:type",
+      "@type": "xsd:string"
+    },
+    "suggestionsId": {
+      "@id": "asapp3:suggestionsId",
+      "@type": "xsd:string"
+    },
+    "spellcheckApplied": {
+      "@id": "asapp3:spellcheckApplied"
+    },
+    "spellcheckUndone": {
+      "@id": "asapp3:spellcheckUndone"
+    },
+    "customResponseDrawerInserted": {
+      "@id": "asapp3:customResponseDrawerInserted"
+    },
+    "customPanelInserted": {
+      "@id": "asapp3:customPanelInserted"
+    },
+    "globalPanelInserted": {
+      "@id": "asapp3:globalPanelInserted"
+    },
+    "Settings": "asapp3:Settings",
+    "suggestionsWhileTypingDisabled": {
+      "@id": "asapp3:suggestionsWhileTypingDisabled",
+      "@type": "xsd:boolean"
+    },
+    "phraseCompletionsDisabled": {
+      "@id": "asapp3:phraseCompletionsDisabled",
+      "@type": "xsd:boolean"
+    },
+    "spellcheckDisabled": {
+      "@id": "asapp3:spellcheckDisabled",
+      "@type": "xsd:boolean"
+    },
+    "autopilotGreetingsDisabled": {
+      "@id": "asapp3:autopilotGreetingsDisabled",
+      "@type": "xsd:boolean"
+    },
+    "autocomposeDisabled": {
+      "@id": "asapp3:autocomposeDisabled",
+      "@type": "xsd:boolean"
+    },
+    "Response": "asapp3:Response",
+    "folderId": {
+      "@id": "asapp3:folderId",
+      "@type": "xsd:string"
+    },
+    "metadata": {
+      "@id": "asapp3:metadata",
+      "@container": "@list"
+    },
+    "NewCustomResponse": "asapp3:NewCustomResponse",
+    "Responses": "asapp3:Responses",
+    "responsesList": {
+      "@id": "asapp3:responsesList",
+      "@container": "@list"
+    },
+    "folderList": {
+      "@id": "asapp3:folderList",
+      "@container": "@list"
+    },
+    "pageToken": {
+      "@id": "asapp3:pageToken",
+      "@type": "xsd:string"
+    },
+    "Folder": "asapp3:Folder",
+    "parentFolderId": {
+      "@id": "asapp3:parentFolderId",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "asapp3:name",
+      "@type": "xsd:string"
+    },
+    "GlobalResponsesVersion": "asapp3:GlobalResponsesVersion",
+    "description": {
+      "@id": "asapp3:description",
+      "@type": "xsd:string"
+    },
+    "GlobalResponsesWithVersion": "asapp3:GlobalResponsesWithVersion",
+    "responses": {
+      "@id": "asapp3:responses",
+      "@type": "@id"
+    },
+    "version": {
+      "@id": "asapp3:version",
+      "@type": "@id"
+    },
+    "AutopilotGreeting": "asapp3:AutopilotGreeting",
+    "greetingGeneric": {
+      "@id": "asapp3:greetingGeneric",
+      "@type": "xsd:string"
+    },
+    "greetingCustomerName": {
+      "@id": "asapp3:greetingCustomerName",
+      "@type": "xsd:string"
+    },
+    "AutopilotStatus": "asapp3:AutopilotStatus",
+    "enabled": {
+      "@id": "asapp3:enabled",
+      "@type": "xsd:boolean"
+    },
+    "SuggestionsRequest": "asapp3:SuggestionsRequest",
+    "query": {
+      "@id": "asapp3:query",
+      "@type": "xsd:string"
+    },
+    "ParticipantRole": "asapp3:ParticipantRole",
+    "Participant": "asapp3:Participant",
+    "role": {
+      "@id": "asapp3:role",
+      "@type": "@id"
+    },
+    "externalId": {
+      "@id": "asapp3:externalId",
+      "@type": "xsd:string"
+    },
+    "Message": "asapp3:Message",
+    "sender": {
+      "@id": "asapp3:sender",
+      "@type": "@id"
+    },
+    "timestamp": {
+      "@id": "asapp3:timestamp",
+      "@type": "xsd:dateTime"
+    },
+    "DefaultErrorDetails": "asapp3:DefaultErrorDetails",
+    "requestId": {
+      "@id": "asapp3:requestId",
+      "@type": "xsd:string"
+    },
+    "code": {
+      "@id": "asapp3:code",
+      "@type": "xsd:string"
+    },
+    "DefaultErrorResponse": "asapp3:DefaultErrorResponse",
+    "error": {
+      "@id": "asapp3:error",
+      "@type": "@id"
+    },
+    "MessagesResponse": "asapp3:MessagesResponse",
+    "BadRequestResponse": "asapp3:BadRequestResponse",
+    "UnauthorizedResponse": "asapp3:UnauthorizedResponse",
+    "ForbiddenResponse": "asapp3:ForbiddenResponse",
+    "NotFoundResponse": "asapp3:NotFoundResponse",
+    "ConflictResponse": "asapp3:ConflictResponse",
+    "RequestEntityTooLargeResponse": "asapp3:RequestEntityTooLargeResponse",
+    "UnprocessableEntity": "asapp3:UnprocessableEntity",
+    "TooManyRequestsResponse": "asapp3:TooManyRequestsResponse",
+    "ServiceUnavailableResponse": "asapp3:ServiceUnavailableResponse",
+    "FreeTextSummaryResponse": "asapp3:FreeTextSummaryResponse",
+    "summaryId": {
+      "@id": "asapp3:summaryId",
+      "@type": "xsd:string"
+    },
+    "summaryText": {
+      "@id": "asapp3:summaryText",
+      "@type": "xsd:string"
+    },
+    "StructuredDataResponse": "asapp3:StructuredDataResponse",
+    "structuredDataMetrics": {
+      "@id": "asapp3:structuredDataMetrics",
+      "@container": "@list"
+    },
+    "IntentResult": "asapp3:IntentResult",
+    "IntentResponse": "asapp3:IntentResponse",
+    "intent": {
+      "@id": "asapp3:intent",
+      "@type": "@id"
+    },
+    "FreeTextSummaryFeedback": "asapp3:FreeTextSummaryFeedback",
+    "externalConversationId": {
+      "@id": "asapp3:externalConversationId",
+      "@type": "xsd:string"
+    },
+    "StreamingUrl": "asapp3:StreamingUrl",
+    "streamingUrl": {
+      "@id": "asapp3:streamingUrl",
+      "@type": "xsd:string"
+    },
+    "Conversation": "asapp3:Conversation",
+    "agent": {
+      "@id": "asapp3:agent"
+    },
+    "customer": {
+      "@id": "asapp3:customer"
+    },
+    "TimeBasedConversation": "asapp3:TimeBasedConversation",
+    "BatchMessages": "asapp3:BatchMessages",
+    "messages": {
+      "@id": "asapp3:messages",
+      "@container": "@list"
+    },
+    "ConversationResponse": "asapp3:ConversationResponse",
+    "Conversations": "asapp3:Conversations",
+    "items": {
+      "@id": "asapp3:items",
+      "@container": "@list"
+    },
+    "GetMessagesResponse": "asapp3:GetMessagesResponse",
+    "GetMessageResponse": "asapp3:GetMessageResponse",
+    "createdTimestamp": {
+      "@id": "asapp3:createdTimestamp",
+      "@type": "xsd:dateTime"
+    },
+    "clientTimestamp": {
+      "@id": "asapp3:clientTimestamp",
+      "@type": "xsd:dateTime"
+    },
+    "AuthObject": "asapp3:AuthObject",
+    "streamId": {
+      "@id": "asapp3:streamId",
+      "@type": "xsd:string"
+    },
+    "customerExternalId": {
+      "@id": "asapp3:customerExternalId",
+      "@type": "xsd:string"
+    },
+    "auth": {
+      "@id": "asapp3:auth"
+    },
+    "ListFeedsResponse": "asapp3:ListFeedsResponse",
+    "feeds": {
+      "@id": "asapp3:feeds",
+      "@container": "@list"
+    },
+    "ListFeedVersionsRequest": "asapp3:ListFeedVersionsRequest",
+    "feed": {
+      "@id": "asapp3:feed",
+      "@type": "xsd:string"
+    },
+    "ListFeedVersionsResponse": "asapp3:ListFeedVersionsResponse",
+    "versions": {
+      "@id": "asapp3:versions",
+      "@container": "@list"
+    },
+    "ListFeedFormatsRequest": "asapp3:ListFeedFormatsRequest",
+    "ListFeedFormatsResponse": "asapp3:ListFeedFormatsResponse",
+    "formats": {
+      "@id": "asapp3:formats",
+      "@container": "@list"
+    },
+    "ListFeedDatesRequest": "asapp3:ListFeedDatesRequest",
+    "format": {
+      "@id": "asapp3:format",
+      "@type": "xsd:string"
+    },
+    "ListFeedDatesResponse": "asapp3:ListFeedDatesResponse",
+    "dates": {
+      "@id": "asapp3:dates",
+      "@container": "@list"
+    },
+    "ListFeedIntervalsRequest": "asapp3:ListFeedIntervalsRequest",
+    "date": {
+      "@id": "asapp3:date",
+      "@type": "xsd:string"
+    },
+    "ListFeedIntervalsResponse": "asapp3:ListFeedIntervalsResponse",
+    "intervals": {
+      "@id": "asapp3:intervals",
+      "@container": "@list"
+    },
+    "ListFeedFilesRequest": "asapp3:ListFeedFilesRequest",
+    "interval": {
+      "@id": "asapp3:interval",
+      "@type": "xsd:string"
+    },
+    "ListFeedFilesResponse": "asapp3:ListFeedFilesResponse",
+    "files": {
+      "@id": "asapp3:files",
+      "@container": "@list"
+    },
+    "GetFeedFileRequest": "asapp3:GetFeedFileRequest",
+    "fileName": {
+      "@id": "asapp3:fileName",
+      "@type": "xsd:string"
+    },
+    "GetFeedFileResponse": "asapp3:GetFeedFileResponse",
+    "url": {
+      "@id": "asapp3:url",
+      "@type": "xsd:string"
+    },
+    "GenerativeAgentSignalReply": "asapp3:GenerativeAgentSignalReply",
+    "webhookMessageId": {
+      "@id": "asapp3:webhookMessageId",
+      "@type": "xsd:string"
+    },
+    "reply": {
+      "@id": "asapp3:reply"
+    },
+    "GenerativeAgentSignalProcessingStart": "asapp3:GenerativeAgentSignalProcessingStart",
+    "GenerativeAgentSignalProcessingEnd": "asapp3:GenerativeAgentSignalProcessingEnd",
+    "GenerativeAgentSignalAuthenticationRequested": "asapp3:GenerativeAgentSignalAuthenticationRequested",
+    "GenerativeAgentSignalTransferToAgent": "asapp3:GenerativeAgentSignalTransferToAgent",
+    "health-check": "asapp3:health-check",
+    "healthCheck": {
+      "@id": "asapp3:healthCheck",
+      "@type": "xsd:string"
+    },
+    "SubmissionRequest": "asapp3:SubmissionRequest",
+    "articleId": {
+      "@id": "asapp3:articleId",
+      "@type": "xsd:string"
+    },
+    "content": {
+      "@id": "asapp3:content",
+      "@type": "xsd:string"
+    },
+    "queryExamples": {
+      "@id": "asapp3:queryExamples",
+      "@container": "@list"
+    },
+    "additionalInstructions": {
+      "@id": "asapp3:additionalInstructions",
+      "@container": "@list"
+    },
+    "Submission": "asapp3:Submission",
+    "submittedAt": {
+      "@id": "asapp3:submittedAt",
+      "@type": "xsd:dateTime"
+    },
+    "status": {
+      "@id": "asapp3:status",
+      "@type": "@id"
+    },
+    "Article": "asapp3:Article",
+    "updatedAt": {
+      "@id": "asapp3:updatedAt",
+      "@type": "xsd:dateTime"
+    },
+    "updatedBy": {
+      "@id": "asapp3:updatedBy",
+      "@type": "xsd:string"
+    },
+    "originalContent": {
+      "@id": "asapp3:originalContent",
+      "@type": "xsd:string"
+    },
+    "originalTitle": {
+      "@id": "asapp3:originalTitle",
+      "@type": "xsd:string"
+    },
+    "pendingSubmissionId": {
+      "@id": "asapp3:pendingSubmissionId",
+      "@type": "xsd:string"
+    },
+    "currentVersion": {
+      "@id": "asapp3:currentVersion",
+      "@type": "xsd:string"
+    },
+    "deploymentStatus": {
+      "@id": "asapp3:deploymentStatus",
+      "@type": "@id"
+    },
+    "Metadata": "asapp3:Metadata",
+    "key": {
+      "@id": "asapp3:key",
+      "@type": "xsd:string"
+    },
+    "value": {
+      "@id": "asapp3:value",
+      "@type": "xsd:string"
+    },
+    "AdditionalInstruction": "asapp3:AdditionalInstruction",
+    "clarificationInstruction": {
+      "@id": "asapp3:clarificationInstruction",
+      "@type": "xsd:string"
+    },
+    "exampleResponse": {
+      "@id": "asapp3:exampleResponse",
+      "@type": "xsd:string"
+    },
+    "SubmissionStatus": "asapp3:SubmissionStatus",
+    "DeploymentStatus": "asapp3:DeploymentStatus",
+    "Attribute": "asapp3:Attribute",
+    "MessageSentStatus": "asapp3:MessageSentStatus",
+    "eventId": {
+      "@id": "asapp3:eventId",
+      "@type": "xsd:string"
+    },
+    "AgentMetadata": "asapp3:AgentMetadata",
+    "externalAgentId": {
+      "@id": "asapp3:externalAgentId",
+      "@type": "xsd:string"
+    },
+    "startTs": {
+      "@id": "asapp3:startTs",
+      "@type": "xsd:dateTime"
+    },
+    "lobId": {
+      "@id": "asapp3:lobId",
+      "@type": "xsd:string"
+    },
+    "lobName": {
+      "@id": "asapp3:lobName",
+      "@type": "xsd:string"
+    },
+    "groupId": {
+      "@id": "asapp3:groupId",
+      "@type": "xsd:string"
+    },
+    "groupName": {
+      "@id": "asapp3:groupName",
+      "@type": "xsd:string"
+    },
+    "agentName": {
+      "@id": "asapp3:agentName",
+      "@type": "xsd:string"
+    },
+    "agentLocation": {
+      "@id": "asapp3:agentLocation",
+      "@type": "xsd:string"
+    },
+    "supervisorId": {
+      "@id": "asapp3:supervisorId",
+      "@type": "xsd:string"
+    },
+    "supervisorName": {
+      "@id": "asapp3:supervisorName",
+      "@type": "xsd:string"
+    },
+    "languages": {
+      "@id": "asapp3:languages",
+      "@container": "@list"
+    },
+    "concurrency": {
+      "@id": "asapp3:concurrency",
+      "@type": "xsd:integer"
+    },
+    "categoryLabel": {
+      "@id": "asapp3:categoryLabel",
+      "@type": "xsd:string"
+    },
+    "accountAccessLevel": {
+      "@id": "asapp3:accountAccessLevel",
+      "@type": "xsd:string"
+    },
+    "ranking": {
+      "@id": "asapp3:ranking",
+      "@type": "xsd:integer"
+    },
+    "vendor": {
+      "@id": "asapp3:vendor",
+      "@type": "xsd:string"
+    },
+    "jobTitle": {
+      "@id": "asapp3:jobTitle",
+      "@type": "xsd:string"
+    },
+    "jobRole": {
+      "@id": "asapp3:jobRole",
+      "@type": "xsd:string"
+    },
+    "workShift": {
+      "@id": "asapp3:workShift",
+      "@type": "xsd:string"
+    },
+    "emailAddress": {
+      "@id": "asapp3:emailAddress",
+      "@type": "xsd:string"
+    },
+    "attributes": {
+      "@id": "asapp3:attributes",
+      "@container": "@list"
+    },
+    "AgentMetadataMany": "asapp3:AgentMetadataMany",
+    "ConversationMetadata": "asapp3:ConversationMetadata",
+    "agentRoutingCode": {
+      "@id": "asapp3:agentRoutingCode",
+      "@type": "xsd:string"
+    },
+    "campaign": {
+      "@id": "asapp3:campaign",
+      "@type": "xsd:string"
+    },
+    "deviceType": {
+      "@id": "asapp3:deviceType",
+      "@type": "xsd:string"
+    },
+    "platform": {
+      "@id": "asapp3:platform",
+      "@type": "xsd:string"
+    },
+    "companySegment": {
+      "@id": "asapp3:companySegment",
+      "@container": "@list"
+    },
+    "companySubdivision": {
+      "@id": "asapp3:companySubdivision",
+      "@type": "xsd:string"
+    },
+    "businessRule": {
+      "@id": "asapp3:businessRule",
+      "@type": "xsd:string"
+    },
+    "entryType": {
+      "@id": "asapp3:entryType",
+      "@type": "xsd:string"
+    },
+    "operatingSystem": {
+      "@id": "asapp3:operatingSystem",
+      "@type": "xsd:string"
+    },
+    "browserType": {
+      "@id": "asapp3:browserType",
+      "@type": "xsd:string"
+    },
+    "browserVersion": {
+      "@id": "asapp3:browserVersion",
+      "@type": "xsd:string"
+    },
+    "ConversationMetadataMany": "asapp3:ConversationMetadataMany",
+    "CustomerMetadata": "asapp3:CustomerMetadata",
+    "externalCustomerId": {
+      "@id": "asapp3:externalCustomerId",
+      "@type": "xsd:string"
+    },
+    "phoneNumber": {
+      "@id": "asapp3:phoneNumber",
+      "@type": "xsd:string"
+    },
+    "userId": {
+      "@id": "asapp3:userId",
+      "@type": "xsd:string"
+    },
+    "addressCountry": {
+      "@id": "asapp3:addressCountry",
+      "@type": "xsd:string"
+    },
+    "addressState": {
+      "@id": "asapp3:addressState",
+      "@type": "xsd:string"
+    },
+    "addressZipcode": {
+      "@id": "asapp3:addressZipcode",
+      "@type": "xsd:string"
+    },
+    "CustomerMetadataMany": "asapp3:CustomerMetadataMany",
+    "AddMetadataResponse": "asapp3:AddMetadataResponse",
+    "result": {
+      "@id": "asapp3:result",
+      "@type": "@id"
+    },
+    "AddManyMetadataResponse": "asapp3:AddManyMetadataResponse",
+    "errorCount": {
+      "@id": "asapp3:errorCount",
+      "@type": "xsd:integer"
+    },
+    "results": {
+      "@id": "asapp3:results",
+      "@container": "@list"
+    },
+    "StartStreamingRequest": "asapp3:StartStreamingRequest",
+    "namespace": {
+      "@id": "asapp3:namespace",
+      "@type": "xsd:string"
+    },
+    "guid": {
+      "@id": "asapp3:guid",
+      "@type": "xsd:string"
+    },
+    "autotranscribeParams": {
+      "@id": "asapp3:autotranscribeParams",
+      "@type": "@id"
+    },
+    "siprecParams": {
+      "@id": "asapp3:siprecParams",
+      "@type": "@id"
+    },
+    "twilioParams": {
+      "@id": "asapp3:twilioParams",
+      "@type": "@id"
+    },
+    "amazonConnectParams": {
+      "@id": "asapp3:amazonConnectParams",
+      "@type": "@id"
+    },
+    "customerId": {
+      "@id": "asapp3:customerId",
+      "@type": "xsd:string"
+    },
+    "agentId": {
+      "@id": "asapp3:agentId",
+      "@type": "xsd:string"
+    },
+    "StartStreamingAutotranscribeParams": "asapp3:StartStreamingAutotranscribeParams",
+    "language": {
+      "@id": "asapp3:language",
+      "@type": "xsd:string"
+    },
+    "detailedToken": {
+      "@id": "asapp3:detailedToken",
+      "@type": "xsd:boolean"
+    },
+    "audioRecordingAllowed": {
+      "@id": "asapp3:audioRecordingAllowed",
+      "@type": "xsd:boolean"
+    },
+    "redactionOutput": {
+      "@id": "asapp3:redactionOutput",
+      "@type": "xsd:string"
+    },
+    "StartStreamingSiprecParams": "asapp3:StartStreamingSiprecParams",
+    "mediaLineOrder": {
+      "@id": "asapp3:mediaLineOrder",
+      "@type": "@id"
+    },
+    "SiprecMediaLineOrder": "asapp3:SiprecMediaLineOrder",
+    "StartStreamingTwilioParams": "asapp3:StartStreamingTwilioParams",
+    "trackMap": {
+      "@id": "asapp3:trackMap",
+      "@type": "@id"
+    },
+    "TwilioTrackMap": "asapp3:TwilioTrackMap",
+    "inbound": {
+      "@id": "asapp3:inbound",
+      "@type": "xsd:string"
+    },
+    "outbound": {
+      "@id": "asapp3:outbound",
+      "@type": "xsd:string"
+    },
+    "StartStreamingAmazonConnectParams": "asapp3:StartStreamingAmazonConnectParams",
+    "streamArn": {
+      "@id": "asapp3:streamArn",
+      "@type": "xsd:string"
+    },
+    "startSelectorType": {
+      "@id": "asapp3:startSelectorType",
+      "@type": "xsd:string"
+    },
+    "afterFragmentNumber": {
+      "@id": "asapp3:afterFragmentNumber",
+      "@type": "xsd:string"
+    },
+    "StartStreamingResponse": "asapp3:StartStreamingResponse",
+    "autotranscribeResponse": {
+      "@id": "asapp3:autotranscribeResponse",
+      "@type": "@id"
+    },
+    "isOk": {
+      "@id": "asapp3:isOk",
+      "@type": "xsd:boolean"
+    },
+    "errorMessage": {
+      "@id": "asapp3:errorMessage",
+      "@type": "xsd:string"
+    },
+    "StartStreamingAutotranscribeResponse": "asapp3:StartStreamingAutotranscribeResponse",
+    "StartStreamingAutotranscribeResponseDetails": "asapp3:StartStreamingAutotranscribeResponseDetails",
+    "AutotranscribeResponseStatus": "asapp3:AutotranscribeResponseStatus",
+    "StopStreamingRequest": "asapp3:StopStreamingRequest",
+    "StopStreamingResponse": "asapp3:StopStreamingResponse",
+    "StopStreamingAutotranscribeResponse": "asapp3:StopStreamingAutotranscribeResponse",
+    "StopStreamingAutotranscribeResponseDetails": "asapp3:StopStreamingAutotranscribeResponseDetails",
+    "summary": {
+      "@id": "asapp3:summary",
+      "@type": "@id"
+    },
+    "StopStreamingResponseSummary": "asapp3:StopStreamingResponseSummary",
+    "totalAudioBytes": {
+      "@id": "asapp3:totalAudioBytes",
+      "@type": "xsd:integer"
+    },
+    "audioDurationMs": {
+      "@id": "asapp3:audioDurationMs",
+      "@type": "xsd:integer"
+    },
+    "streamingSeconds": {
+      "@id": "asapp3:streamingSeconds",
+      "@type": "xsd:integer"
+    },
+    "transcripts": {
+      "@id": "asapp3:transcripts",
+      "@type": "xsd:integer"
+    },
+    "GetTwilioMediaStreamsResponse": "asapp3:GetTwilioMediaStreamsResponse"
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Asapp3 API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Asapp3's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-09-26) from openapi/asapp3-openapi.yaml.",
+  "dcterms:created": "2026-09-26",
+  "dcterms:source": [
+    "openapi/asapp3-openapi.yaml"
+  ]
+}

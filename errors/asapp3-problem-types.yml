@@ -1,0 +1,83 @@
+generated: '2026-09-26'
+method: derived
+generator: derive-problem-types.py
+source:
+- openapi/asapp3-openapi.yaml
+format: custom
+envelope:
+  media_type: application/json
+  schema: DefaultErrorResponse
+coverage:
+  operations: 56
+  statuses_declared: 10
+problems:
+- status: 400
+  title: Bad Request
+  description: 400 - Bad request
+  operations: 53
+  media_types:
+  - application/json
+  schema: BadRequestResponse
+- status: 401
+  title: Unauthorized
+  description: 401 - Unauthorized
+  operations: 54
+  media_types:
+  - application/json
+  schema: UnauthorizedResponse
+- status: 403
+  title: Forbidden
+  description: 403 - Forbidden
+  operations: 53
+  media_types:
+  - application/json
+  schema: ForbiddenResponse
+- status: 404
+  title: Not Found
+  description: 404 - Not Found
+  operations: 53
+  media_types:
+  - application/json
+  schema: NotFoundResponse
+- status: 409
+  title: Conflict
+  description: 409 - Conflict
+  operations: 46
+  media_types:
+  - application/json
+  schema: ConflictResponse
+- status: 413
+  title: Content Too Large
+  description: 413 - Request Entity Too Large
+  operations: 47
+  media_types:
+  - application/json
+  schema: RequestEntityTooLargeResponse
+- status: 422
+  title: Unprocessable Content
+  description: 422 - Unprocessable Entity
+  operations: 50
+  media_types:
+  - application/json
+  schema: UnprocessableEntity
+- status: 429
+  title: Too Many Requests
+  description: 429 - Too Many Requests
+  operations: 53
+  media_types:
+  - application/json
+  schema: TooManyRequestsResponse
+- status: 503
+  title: Service Unavailable
+  description: 503 - Service Unavailable
+  operations: 53
+  media_types:
+  - application/json
+  schema: ServiceUnavailableResponse
+- status: default
+  title: null
+  description: 500 - Internal Server Error
+  operations: 55
+  media_types:
+  - application/json
+  schema: DefaultErrorResponse

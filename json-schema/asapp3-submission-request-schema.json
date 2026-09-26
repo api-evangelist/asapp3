@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/asapp3/main/json-schema/asapp3-submission-request-schema.json",
+  "title": "SubmissionRequest",
+  "description": "A proposal for creating a new article or updating an existing one in the Knowledge Base.",
+  "x-generated": "2026-09-26",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/asapp3-openapi.yaml#/components/schemas/SubmissionRequest",
+  "type": "object",
+  "properties": {
+    "articleId": {
+      "type": "string",
+      "description": "The unique identifier for the article being updated."
+    },
+    "title": {
+      "type": "string",
+      "description": "The proposed title of the article, which will be refined automatically. This is required for new articles.",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "content": {
+      "type": "string",
+      "description": "The article content in plain text, expected to be in English and limited to 200,000 Unicode characters. This will be refined during submission. Required for new articles.",
+      "minLength": 1,
+      "maxLength": 200000
+    },
+    "url": {
+      "type": "string",
+      "description": "A reference URL for the article, used for informational purposes only."
+    },
+    "metadata": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Metadata"
+      },
+      "description": "Additional key-value pairs related to the article."
+    },
+    "queryExamples": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Examples of customer questions related to the article, such as \"Why is my bill so high?\". Defaults to an empty list if not provided."
+    },
+    "additionalInstructions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/AdditionalInstruction"
+      },
+      "description": "Specific instructions to ensure responses are relevant and address exceptions."
+    }
+  },
+  "$defs": {
+    "AdditionalInstruction": {
+      "description": "Guidelines and responses to enhance the article.",
+      "type": "object",
+      "properties": {
+        "clarificationInstruction": {
+          "type": "string",
+          "description": "A guideline to improve the article's content."
+        },
+        "exampleResponse": {
+          "type": "string",
+          "description": "A sample response applicable if the clarification instruction is followed."
+        }
+      }
+    },
+    "Metadata": {
+      "description": "A key-value pair providing additional information about the article.",
+      "type": "object",
+      "required": [
+        "key",
+        "value"
+      ],
+      "properties": {
+        "key": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The key for the metadata entry."
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The value for the metadata entry."
+        }
+      }
+    }
+  }
+}

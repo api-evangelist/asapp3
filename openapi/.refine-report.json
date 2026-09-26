@@ -1,0 +1,28 @@
+{
+  "provider": "asapp3",
+  "sources": [
+    "asapp3-openapi.yaml"
+  ],
+  "outputs": [
+    "asapp3-autocompose-api-openapi.yml",
+    "asapp3-autosummary-api-openapi.yml",
+    "asapp3-autotranscribe-api-openapi.yml",
+    "asapp3-autotranscribe-media-gateway-api-openapi.yml",
+    "asapp3-conversations-api-openapi.yml",
+    "asapp3-file-exporter-api-openapi.yml",
+    "asapp3-generativeagent-api-openapi.yml",
+    "asapp3-health-check-api-openapi.yml",
+    "asapp3-knowledge-base-api-openapi.yml",
+    "asapp3-metadata-api-openapi.yml"
+  ],
+  "archived": [
+    "archived openapi/asapp3-openapi.yaml"
+  ],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "asapp3-openapi.yaml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "apis.yml register: written (+10 apis, 10 total)"
+  ],
+  "skipped": []
+}

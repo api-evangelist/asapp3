@@ -1,0 +1,6 @@
+generated: "2026-09-26"
+method: derived
+source: "openapi/asapp3-openapi.yaml"
+idempotency:
+  coverage: none
+actions: []

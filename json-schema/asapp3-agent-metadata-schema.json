@@ -1,0 +1,222 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/asapp3/main/json-schema/asapp3-agent-metadata-schema.json",
+  "title": "AgentMetadata",
+  "description": "A set of agent metadata attributes",
+  "x-generated": "2026-09-26",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/asapp3-openapi.yaml#/components/schemas/AgentMetadata",
+  "type": "object",
+  "properties": {
+    "externalAgentId": {
+      "description": "The agent id in question",
+      "type": "string",
+      "pattern": "[a-zA-Z0-9\\-\\_]+",
+      "maxLength": 256
+    },
+    "eventId": {
+      "description": "An event id used to track the submission; if none is provided, service will generate one\n",
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "[a-zA-Z0-9\\-\\_]+",
+      "maxLength": 256
+    },
+    "startTs": {
+      "description": "The date and time when the agent is hired in ISO-8601",
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "lobId": {
+      "description": "The line of business id",
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "[a-zA-Z0-9\\-\\_]+",
+      "maxLength": 256
+    },
+    "lobName": {
+      "description": "The descriptive name of the line of business",
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 256
+    },
+    "groupId": {
+      "description": "The group id of which the agent belong to",
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "[a-zA-Z0-9\\-\\_]+",
+      "maxLength": 256
+    },
+    "groupName": {
+      "description": "The descriptive name of the group",
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 256
+    },
+    "agentName": {
+      "description": "The name of the agent",
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 256
+    },
+    "agentLocation": {
+      "description": "The location (or address) of where the agent worked",
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 256
+    },
+    "supervisorId": {
+      "description": "The supervisor id of who the agent report to",
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "[a-zA-Z0-9\\-\\_]+",
+      "maxLength": 256
+    },
+    "supervisorName": {
+      "description": "The name of the agent's supervisor",
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 256
+    },
+    "languages": {
+      "description": "A list of agent's known language codes in ISO 639\ne.g., English (United States) code = en-US\n",
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string",
+        "pattern": "[a-zA-Z0-9\\-]+",
+        "maxLength": 16
+      }
+    },
+    "concurrency": {
+      "description": "The number of issues that an agent can take at a time",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "categoryLabel": {
+      "description": "The category label that indicates the types of workflows an agent have access to or problems they solved",
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "[a-zA-Z0-9\\-\\_]+",
+      "maxLength": 256
+    },
+    "accountAccessLevel": {
+      "description": "The levels of mapping that an agent have access to make changes to customer accounts",
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "[a-zA-Z0-9\\-\\_]+",
+      "maxLength": 256
+    },
+    "ranking": {
+      "description": "Some numerical value indicating relative or absolute performance on a single scale",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "vendor": {
+      "description": "Vendor or BPO (Business Process Outsourcing) that the agent is part of",
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 256
+    },
+    "jobTitle": {
+      "description": "The agent's job title",
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "[a-zA-Z0-9\\-\\_]+",
+      "maxLength": 256
+    },
+    "jobRole": {
+      "description": "The agent's role",
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "[a-zA-Z0-9\\-\\_]+",
+      "maxLength": 256
+    },
+    "workShift": {
+      "description": "The hours or shift name they work",
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "[a-zA-Z0-9\\-\\_]+",
+      "maxLength": 256
+    },
+    "emailAddress": {
+      "description": "The agent's email address",
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "email"
+    },
+    "attributes": {
+      "description": "A map of key-value pairs for extra metadata attributes",
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/Attribute"
+      },
+      "maxItems": 10
+    }
+  },
+  "required": [
+    "externalAgentId"
+  ],
+  "$defs": {
+    "Attribute": {
+      "description": "A key-value pair of additional metadata attributes",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the attribute",
+          "type": "string",
+          "maxLength": 256
+        },
+        "value": {
+          "description": "The value of the named attribute",
+          "type": "string",
+          "maxLength": 1024
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,414 @@
+generated: '2026-09-26'
+method: derived
+generator: derive-vocabulary.py
+source: openapi/asapp3-openapi.yaml
+vocabulary:
+  name: Asapp3 Domain Vocabulary
+  description: 'Terms declared by Asapp3''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-09-26'
+  terms:
+  - term: AutoCompose
+    definition: Improve agent productivity with AutoCompose API
+    tags:
+    - Resource Group
+    source: openapi/asapp3-openapi.yaml
+  - term: AutoSummary
+    definition: Endpoints for summarizing conversations and retrieving structured data
+    tags:
+    - Resource Group
+    source: openapi/asapp3-openapi.yaml
+  - term: AutoTranscribe
+    definition: Get streaming URL to transcribe audio
+    tags:
+    - Resource Group
+    source: openapi/asapp3-openapi.yaml
+  - term: Conversations
+    definition: Operations to send conversational inputs to ASAPP AI services
+    tags:
+    - Resource Group
+    source: openapi/asapp3-openapi.yaml
+  - term: File Exporter
+    definition: API to get client exports
+    tags:
+    - Resource Group
+    source: openapi/asapp3-openapi.yaml
+  - term: GenerativeAgent
+    definition: Operations to send messages and trigger GenerativeAgent to respond or query the current state
+    tags:
+    - Resource Group
+    source: openapi/asapp3-openapi.yaml
+  - term: Health Check
+    definition: Operations to ensure that ASAPP APIs are up and running.
+    tags:
+    - Resource Group
+    source: openapi/asapp3-openapi.yaml
+  - term: Knowledge Base
+    definition: Operations to submit and retrieve Articles to the GenerativeAgent Knowledge Base.
+    tags:
+    - Resource Group
+    source: openapi/asapp3-openapi.yaml
+  - term: Metadata
+    definition: API to submit entity's attributes to ASAPP
+    tags:
+    - Resource Group
+    source: openapi/asapp3-openapi.yaml
+  - term: AutoTranscribe Media Gateway
+    definition: Operations for controlling AutoTranscribe Media Gateway transcription and streaming
+    tags:
+    - Resource Group
+    source: openapi/asapp3-openapi.yaml
+  - term: Suggestion
+    definition: Suggestion
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/Suggestion
+  - term: PhraseCompletion
+    definition: Completion of the phrase the agent is currently typing, to be displayed inline in the composer
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/PhraseCompletion
+  - term: AutopilotMessage
+    definition: Recommended message for the agent to autopilot send.
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/AutopilotMessage
+  - term: Suggestions
+    definition: Suggestions for next agent message
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/Suggestions
+  - term: ProfanityResult
+    definition: ProfanityResult
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/ProfanityResult
+  - term: SpellcheckQuery
+    definition: 'Object declared by the contract with fields: text, typingEvent, userDictionary.'
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/SpellcheckQuery
+  - term: SpellcheckCorrection
+    definition: 'Object declared by the contract with fields: id, misspelledText, correctedText, position.'
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/SpellcheckCorrection
+  - term: MessageSentEvent
+    definition: Analytics event describing the agent's usage of AutoCompose features while composing a message (we sometimes refer to these as
+      augmentation features, because they augment the agent's work). Note that many of the fields are not technically required according to this
+      spec. This does not mean that they can omitted arbitrarily. They should all be set, when they relevant for AutoCompose features a part
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/MessageSentEvent
+  - term: MessageAnalyticEvent
+    definition: Analytics event reporting actions the agent performed while composing a message.
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/MessageAnalyticEvent
+  - term: Settings
+    definition: 'Object declared by the contract with fields: suggestionsWhileTypingDisabled, phraseCompletionsDisabled, spellcheckDisabled, autopilotGreetingsDisabled,
+      autocomposeDisabled.'
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/Settings
+  - term: Response
+    definition: 'Object declared by the contract with fields: id, text, title, folderId, metadata.'
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/Response
+  - term: NewCustomResponse
+    definition: 'Object declared by the contract with fields: text, title, folderId, metadata.'
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/NewCustomResponse
+  - term: Responses
+    definition: A set of responses and folders for an agent
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/Responses
+  - term: Folder
+    definition: A folder of responses
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/Folder
+  - term: GlobalResponsesVersion
+    definition: 'Object declared by the contract with fields: id, description.'
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/GlobalResponsesVersion
+  - term: GlobalResponsesWithVersion
+    definition: 'Object declared by the contract with fields: responses, version.'
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/GlobalResponsesWithVersion
+  - term: AutopilotGreeting
+    definition: Autopilot greetings for an agent
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/AutopilotGreeting
+  - term: AutopilotStatus
+    definition: Autopilot status for an agent
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/AutopilotStatus
+  - term: SuggestionsRequest
+    definition: A suggestions request with an optional message to add to the conversation
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/SuggestionsRequest
+  - term: ParticipantRole
+    definition: A participant role, usually the customer or an agent for human participants. System participant is also allowed but keep in mind
+      that this role won't be considered a participant in a conversation, just a message sender.
+    tags:
+    - Enumeration
+    source: openapi/asapp3-openapi.yaml#/components/schemas/ParticipantRole
+  - term: Participant
+    definition: Represents a participant in the conversation.
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/Participant
+  - term: Message
+    definition: Represents a single message within a conversation.
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/Message
+  - term: DefaultErrorDetails
+    definition: Error details
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/DefaultErrorDetails
+  - term: DefaultErrorResponse
+    definition: Default error response
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/DefaultErrorResponse
+  - term: MessagesResponse
+    definition: Response for messages
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/MessagesResponse
+  - term: BadRequestResponse
+    definition: Bad request response
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/BadRequestResponse
+  - term: UnauthorizedResponse
+    definition: Unauthorized response
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/UnauthorizedResponse
+  - term: ForbiddenResponse
+    definition: Forbidden response
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/ForbiddenResponse
+  - term: NotFoundResponse
+    definition: Not Found response
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/NotFoundResponse
+  - term: ConflictResponse
+    definition: Conflict response
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/ConflictResponse
+  - term: RequestEntityTooLargeResponse
+    definition: Request Entity Too Large response
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/RequestEntityTooLargeResponse
+  - term: UnprocessableEntity
+    definition: Unprocessable Entity response
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/UnprocessableEntity
+  - term: TooManyRequestsResponse
+    definition: Too Many Requests response
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/TooManyRequestsResponse
+  - term: ServiceUnavailableResponse
+    definition: Service Unavailable response
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/ServiceUnavailableResponse
+  - term: FreeTextSummaryResponse
+    definition: 'Object declared by the contract with fields: conversationId, summaryId, summaryText.'
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/FreeTextSummaryResponse
+  - term: StructuredDataResponse
+    definition: 'Object declared by the contract with fields: conversationId, id, structuredDataMetrics.'
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/StructuredDataResponse
+  - term: IntentResult
+    definition: 'Object declared by the contract with fields: code, name.'
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/IntentResult
+  - term: IntentResponse
+    definition: 'Object declared by the contract with fields: conversationId, intent.'
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/IntentResponse
+  - term: FreeTextSummaryFeedback
+    definition: Information regarding the updated free-text summary. It must contain the full updated summary as a string.
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/FreeTextSummaryFeedback
+  - term: StreamingUrl
+    definition: Get streaming url
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/StreamingUrl
+  - term: Conversation
+    definition: Represents a conversation between an agent and a customer.
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/Conversation
+  - term: TimeBasedConversation
+    definition: Conversation between an agent and a customer that requires a timestamp of creation
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/TimeBasedConversation
+  - term: BatchMessages
+    definition: A batch of messages for conversation
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/BatchMessages
+  - term: ConversationResponse
+    definition: Response for conversation
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/ConversationResponse
+  - term: BatchMessagesResponse
+    definition: Response for batch messages
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/BatchMessagesResponse
+  - term: GetMessagesResponse
+    definition: Response for GetMessages
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/GetMessagesResponse
+  - term: GetMessageResponse
+    definition: Response for GetMessage
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/GetMessageResponse
+  - term: AuthObject
+    definition: Contains authentication information for a customer in a conversation.
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/AuthObject
+  - term: ListFeedsResponse
+    definition: Get feed names for a company
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/ListFeedsResponse
+  - term: ListFeedVersionsRequest
+    definition: Get versions for a company feed
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/ListFeedVersionsRequest
+  - term: ListFeedVersionsResponse
+    definition: Get versions for a company feed
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/ListFeedVersionsResponse
+  - term: ListFeedFormatsRequest
+    definition: Get format for a company feed/version
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/ListFeedFormatsRequest
+  - term: ListFeedFormatsResponse
+    definition: Get formats for a company feed
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/ListFeedFormatsResponse
+  - term: ListFeedDatesRequest
+    definition: Get dates for a company feed/version/format
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/ListFeedDatesRequest
+  - term: ListFeedDatesResponse
+    definition: Get Dates for a company feed/version/format
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/ListFeedDatesResponse
+  - term: ListFeedIntervalsRequest
+    definition: Get intervals for a company feed/version/format/date
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/ListFeedIntervalsRequest
+  - term: ListFeedIntervalsResponse
+    definition: Get Dates for a company feed/version/format
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/ListFeedIntervalsResponse
+  - term: ListFeedFilesRequest
+    definition: Get files for a company feed/version/format/date/interval
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/ListFeedFilesRequest
+  - term: ListFeedFilesResponse
+    definition: Get files for a company feed/version/format/date/interval
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/ListFeedFilesResponse
+  - term: GetFeedFileRequest
+    definition: Get file for a company feed/version/format/interval/file
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/GetFeedFileRequest
+  - term: GetFeedFileResponse
+    definition: Get a presigned url for a file
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/GetFeedFileResponse
+  - term: GenerativeAgentSignal
+    definition: The type of signals the GenerativeAgent sends through webhooks.
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/GenerativeAgentSignal
+  - term: GenerativeAgentSignalReply
+    definition: 'Object declared by the contract with fields: webhookMessageId, conversationId, externalConversationId, type, reply.'
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/GenerativeAgentSignalReply
+  - term: GenerativeAgentSignalProcessingStart
+    definition: 'Object declared by the contract with fields: webhookMessageId, conversationId, externalConversationId, type.'
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/GenerativeAgentSignalProcessingStart
+  - term: GenerativeAgentSignalProcessingEnd
+    definition: 'Object declared by the contract with fields: webhookMessageId, conversationId, externalConversationId, type.'
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/GenerativeAgentSignalProcessingEnd
+  - term: GenerativeAgentSignalAuthenticationRequested
+    definition: 'Object declared by the contract with fields: webhookMessageId, conversationId, externalConversationId, type.'
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/GenerativeAgentSignalAuthenticationRequested
+  - term: GenerativeAgentSignalTransferToAgent
+    definition: 'Object declared by the contract with fields: webhookMessageId, conversationId, externalConversationId, type.'
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/GenerativeAgentSignalTransferToAgent
+  - term: health-check
+    definition: Response for health check.
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/health-check
+  - term: SubmissionRequest
+    definition: A proposal for creating a new article or updating an existing one in the Knowledge Base.
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/SubmissionRequest
+  - term: Submission
+    definition: Information about a successfully submitted proposal to update an article in the Knowledge Base.
+    tags:
+    - Object
+    source: openapi/asapp3-openapi.yaml#/components/schemas/Submission

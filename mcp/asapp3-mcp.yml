@@ -1,0 +1,11 @@
+generated: "2026-09-26"
+method: none
+idempotency:
+  coverage: none
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: derived

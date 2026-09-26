@@ -1,0 +1,44 @@
+generated: '2026-09-26'
+method: generated
+generator: extract-docs-artifacts.py skills (local)
+source: openapi/asapp3-openapi.yaml
+skills:
+- file: skills/asapp3-create-conversation-with-message.md
+  name: asapp3-create-conversation-with-message
+  api: openapi/asapp3-openapi.yaml
+  operations:
+  - createOrUpdateConversation
+  - createMessage
+- file: skills/asapp3-compose-message.md
+  name: asapp3-compose-message
+  api: openapi/asapp3-openapi.yaml
+  operations:
+  - getSuggestions
+  - getSpellingCorrection
+  - getEvaluation
+- file: skills/asapp3-start-media-stream.md
+  name: asapp3-start-media-stream
+  api: openapi/asapp3-openapi.yaml
+  operations:
+  - startStreaming
+  - getTwilioMediaStreams
+  - stopStreaming
+- file: skills/asapp3-retrieve-feed-file.md
+  name: asapp3-retrieve-feed-file
+  api: openapi/asapp3-openapi.yaml
+  operations:
+  - listFeeds
+  - listFeedVersions
+  - listFeedFormats
+  - listFeedDates
+  - listFeedIntervals
+  - listFeedFiles
+  - listFeedFile
+- file: skills/asapp3-auto-summary-workflow.md
+  name: asapp3-auto-summary-workflow
+  api: openapi/asapp3-openapi.yaml
+  operations:
+  - retrieveFreeTextSummary
+  - getIntent
+  - getFreeTextSummary
+  - createFeedbackEvent

@@ -1,0 +1,36 @@
+generated: '2026-09-26'
+method: searched
+generator: extract-docs-artifacts.py (local)
+source: https://docs.asapp.com/generativeagent/integrate/handling-events.md
+sources:
+- https://docs.asapp.com/generativeagent/integrate/handling-events.md
+- https://docs.asapp.com/reporting/real-time-event-api.md
+- https://docs.asapp.com/agent-desk/integrations/android-sdk/notifications.md
+- https://docs.asapp.com/agent-desk/integrations/ios-sdk/push-notifications.md
+description: ASAPP provides two real‑time delivery mechanisms – a Server‑Sent‑Events (SSE) stream for GenerativeAgent messages and an HTTP POST‑based
+  real‑time event API for activity, journey and queue state feeds.
+events:
+- event: processingStart
+  description: The bot started processing. This can be used to trigger user feedback such as showing a "typing" indicator.
+- event: authenticationRequired
+  description: Some API Connections require additional User authentication; the platform sends this event to indicate that authentication must
+    be performed.
+- event: reply
+  description: The bot has a reply for the conversation; the payload contains the reply message that should be forwarded to the end user.
+- event: processingEnd
+  description: The bot finished processing, indicating that no further events will be sent until another analyze request is made.
+- event: transferToAgent
+  description: The bot could not handle the request and the conversation should be transferred to a live agent.
+- event: transferToSystem
+  description: The bot is transferring control to an external system.
+- event: com.asapp.event.activity
+  description: Agent status change events for tracking schedule adherence.
+- event: com.asapp.event.journey
+  description: Events denoting milestones in a conversation for tracking the customer journey.
+- event: com.asapp.event.queue
+  description: Updates on queues for tracking size and estimated wait times.
+delivery:
+  retries: Configurable via the `retries` field in the endpoint configuration; if the number of retries is exceeded the message is dropped.
+note: SSE streams are secured by a short‑lived token supplied in the `streamingUrl` query parameter. The real‑time POST feed uses mutual TLS (mTLS)
+  authentication as described in the Securing Endpoints with Mutual TLS document.
+docs: https://docs.asapp.com/generativeagent/integrate/handling-events.md

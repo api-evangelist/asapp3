@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/asapp3/main/json-schema/asapp3-message-analytic-event-schema.json",
+  "title": "MessageAnalyticEvent",
+  "description": "Analytics event reporting actions the agent performed while composing a message.\n",
+  "x-generated": "2026-09-26",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/asapp3-openapi.yaml#/components/schemas/MessageAnalyticEvent",
+  "type": "object",
+  "required": [
+    "type",
+    "suggestionsId"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "suggestion-1-inserted",
+        "suggestion-2-inserted",
+        "suggestion-3-inserted",
+        "phrase-completion-accepted",
+        "spellcheck-applied",
+        "spellcheck-undone",
+        "custom-response-drawer-inserted",
+        "custom-panel-inserted",
+        "global-panel-inserted"
+      ],
+      "description": "The type of message analytic event.\n"
+    },
+    "suggestionsId": {
+      "description": "For suggestion-1-inserted, suggestion-2-inserted, suggestion-3-inserted, phrase-completion-accepted,\nthis is the `id` from the Suggestions API response that the agent\ninteracted with. This allows ASAPP to connect the event with additional information (e.g., the\ntext of the suggestion that was inserted).\n\nFor spellcheck-undone, custom-response-drawer-inserted, custom-panel-inserted, and global-panel-inserted, this is the\n`id` of the most recent Suggestions API response in this conversation.\n\nIn all of these cases, providing the Suggestions `id` allows ASAPP to associate the event with the message the agent\nis composing. During the normal flow of using the AutoCompose API, the Suggestions API will always have been called\nat least once since the previous agent message by the time a message analytic event occurs, and each time the\nSuggestions API is called, ASAPP records the ID of the previous\nagent message. Thus, the Suggestions `id` in the analytic event links back to the previous agent message. This permits\nthe analytic event to later be linked to the new message the agent is composing, even though the event occurs before\nthe message is sent.\n",
+      "type": "string"
+    },
+    "spellcheckApplied": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "The details about the spellcheck applied analytic event\n",
+      "properties": {
+        "correctionId": {
+          "description": "The ID of the spellcheck correction API response",
+          "type": "string"
+        }
+      },
+      "required": [
+        "correctionId"
+      ]
+    },
+    "spellcheckUndone": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "The details about the spellcheck undone analytic event\n",
+      "properties": {
+        "correctionId": {
+          "description": "The ID of the spellcheck correction API response",
+          "type": "string"
+        }
+      },
+      "required": [
+        "correctionId"
+      ]
+    },
+    "customResponseDrawerInserted": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "The details about the custom response drawer inserted analytic event",
+      "properties": {
+        "query": {
+          "description": "The query the agent typed to search in the custom response drawer\n",
+          "type": "string"
+        },
+        "text": {
+          "description": "The text of the custom response the agent inserted from the custom response drawer\n",
+          "type": "string"
+        }
+      },
+      "required": [
+        "query",
+        "text"
+      ]
+    },
+    "customPanelInserted": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "The details about the custom panel inserted analytic event",
+      "properties": {
+        "text": {
+          "description": "The text of the custom response the agent inserted using the custom response panel\n",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "globalPanelInserted": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "The details about the global panel inserted analytic event",
+      "properties": {
+        "text": {
+          "description": "The text of the custom response the agent inserted using the global response panel\n",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text"
+      ]
+    }
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/asapp3/main/json-schema/asapp3-message-sent-event-schema.json",
+  "title": "MessageSentEvent",
+  "description": "Analytics event describing the agent's usage of AutoCompose features while composing a message (we sometimes refer to these as augmentation features, because they augment the agent's work).\nNote that many of the fields are not technically required according to this spec. This does not mean that they can omitted arbitrarily. They should all be set, when they relevant for AutoCompose features a particular ASAPP customer is using and the data is available. For some use cases, some fields are not relevant (for example, phraseAutocompletePresentedCt is only relevant if phrase completions are being used). In other cases, the field may relevant but the data might not be avaialble (for example, if the request for suggestions returns too late, it might not be possible set initialSuggestionsId). The customer should try to fill in all relevant fields when they can; this information enables ASAPP to report on the performance of our features and to improve their perforamnce over time.\nWhen a field is omitted, it will take on a default value in the event data. String fields default to empty string and numeric fields default to 0.",
+  "x-generated": "2026-09-26",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/asapp3-openapi.yaml#/components/schemas/MessageSentEvent",
+  "type": "object",
+  "required": [
+    "conversationId",
+    "messageId",
+    "augmentationType"
+  ],
+  "properties": {
+    "conversationId": {
+      "description": "The ASAPP conversation id for the conversation.",
+      "type": "string"
+    },
+    "messageId": {
+      "description": "The ASAPP ID of the message that was sent. This is required for every event,\nto enable correlating the analytics event with the message that was sent.\n",
+      "type": "string"
+    },
+    "augmentationType": {
+      "description": "Types of AutoCompose augmentation features used for composing the\nmessage. Ordering of augmentations and repeated uses of an\naugmentation type are preserved. This is required, so that the usage of\nAutoCompose features can be measured.\n",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "FREEHAND",
+          "AUTOSUGGEST",
+          "AUTOCOMPLETE",
+          "PHRASE_AUTOCOMPLETE",
+          "CUSTOM_DRAWER",
+          "CUSTOM_INSERT",
+          "GLOBAL_INSERT",
+          "FLUENCY_APPLY",
+          "FLUENCY_UNDO"
+        ]
+      }
+    },
+    "numEdits": {
+      "description": "Number of keystrokes of editing the agent did after selecting a full-message suggestions\n(one of the suggestions in the suggestions array, not phraseCompletion). Selecting a\nfull-message suggestion resets the counter. Accepting a phrase completion by hitting tab\nor right arrow increments the counter just like other keystrokes. The idea is to have a rough\nidea of how much editing the agent had to do after selecting a full-message suggestion (in the\nideal case, the message was satisfactory to send as-is and numEdits equals 0).\n",
+      "type": "integer"
+    },
+    "selectedSuggestionText": {
+      "description": "If the agent used a full-message suggestion to compose this message,\nthis is the text of the suggestion\n",
+      "type": "string"
+    },
+    "selectedSuggestionsId": {
+      "description": "If the agent used a full-message suggestion to compose this message, this is the ID of\nthe set of suggestions that the suggestion came from. This helps ASAPP assoicate the MessageSent\nevent with events emitted by AutoCompose internally. If the agent did not use a full-message\nsuggestion, this field can left blank.\n",
+      "type": "string"
+    },
+    "selectedSuggestionIndex": {
+      "description": "If the agent used a full-message suggestion to compose this message, this is the\nindex of the selected suggestion in the set of suggestions that the agent used, starting\nfrom 1 for the top suggestion, 2 for the second from the top, and so on. This should be\nomitted if no suggestion was selected, but it is required if the agent selected\na suggestion, to enable identifying which of the suggestions was used.\n",
+      "type": "integer"
+    },
+    "initialSuggestionsId": {
+      "description": "The ID for the first set of suggestions the agent saw while composing this message.\nThis is required for every event, if suggestions were shown to the agent. If for some reason\nsuggestions were not available, it can be omitted.\n",
+      "type": "string"
+    },
+    "timeToAction": {
+      "description": "Number of seconds between the agent sending their previous\nmessage and their first action for composing this message.\nAn agent action is when one of the following occur:\n - Typing in the composer\n - Selecting a suggestion\n - Using a phrase completion\n - Inserting a custom or global response from the library\n - Pasting a text into the composer\n",
+      "type": "number"
+    },
+    "craftingTime": {
+      "description": "Number of seconds between the agent's first action\nand last action for composing this message.\n",
+      "type": "number"
+    },
+    "dwellTime": {
+      "description": "Number of seconds between the agent's last action\nfor composing this message and the message being sent.\n",
+      "type": "number"
+    },
+    "phraseAutocompletePresentedCt": {
+      "description": "Number of phrase autocomplete suggestions presented\nto the agent.\n",
+      "type": "integer"
+    },
+    "phraseAutocompleteSelectedCt": {
+      "description": "Number of phrase autocomplete suggestions selected\nby the agent.\n",
+      "type": "integer"
+    }
+  }
+}

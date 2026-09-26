@@ -1,0 +1,549 @@
+generated: '2026-09-26'
+method: derived
+generator: derive-data-model.py
+source:
+- openapi/asapp3-openapi.yaml
+notation: has_one = property $ref; has_many = array of $ref; belongs_to = <entity>_id field
+summary:
+  entities: 101
+  entities_in_spec: 101
+  relationships: 67
+entities:
+- name: AddManyMetadataResponse
+  fields: 2
+- name: AddMetadataResponse
+  fields: 1
+- name: AdditionalInstruction
+  fields: 2
+  description: Guidelines and responses to enhance the article.
+- name: AgentMetadata
+  fields: 22
+  description: A set of agent metadata attributes
+- name: AgentMetadataMany
+  fields: 1
+  description: A request to send more than one agent metadata; send a list of items
+- name: Article
+  fields: 14
+  description: An article stored within the Knowledge Base.
+- name: Attribute
+  fields: 2
+  description: A key-value pair of additional metadata attributes
+- name: AuthObject
+  fields: 3
+  description: Contains authentication information for a customer in a conversation.
+- name: AutopilotGreeting
+  fields: 2
+  description: Autopilot greetings for an agent
+- name: AutopilotMessage
+  fields: 5
+  description: Recommended message for the agent to autopilot send.
+- name: AutopilotStatus
+  fields: 1
+  description: Autopilot status for an agent
+- name: AutotranscribeResponseStatus
+  fields: 2
+- name: BadRequestResponse
+  fields: 1
+  description: Bad request response
+- name: BatchMessages
+  fields: 1
+  description: A batch of messages for conversation
+- name: BatchMessagesResponse
+  fields: 0
+  description: Response for batch messages
+- name: ConflictResponse
+  fields: 1
+  description: Conflict response
+- name: Conversation
+  fields: 5
+  description: Represents a conversation between an agent and a customer.
+- name: ConversationMetadata
+  fields: 18
+  description: A set of conversation metadata attributes
+- name: ConversationMetadataMany
+  fields: 1
+  description: A request to send more than one conversation metadata attributes; send a list of items
+- name: ConversationResponse
+  fields: 1
+  description: Response for conversation
+- name: Conversations
+  fields: 1
+  description: A list of conversations
+- name: CustomerMetadata
+  fields: 11
+  description: A set of customer metadata attributes
+- name: CustomerMetadataMany
+  fields: 1
+  description: A request to send more than one customer metadata; send a list of items
+- name: DefaultErrorDetails
+  fields: 3
+  description: Error details
+- name: DefaultErrorResponse
+  fields: 1
+  description: Default error response
+- name: Folder
+  fields: 3
+  description: A folder of responses
+- name: ForbiddenResponse
+  fields: 1
+  description: Forbidden response
+- name: FreeTextSummaryFeedback
+  fields: 3
+  description: Information regarding the updated free-text summary. It must contain the full updated summary as
+    a string.
+- name: FreeTextSummaryRequest
+  fields: 0
+- name: FreeTextSummaryResponse
+  fields: 3
+- name: GenerativeAgentSignal
+  fields: 0
+  description: The type of signals the GenerativeAgent sends through webhooks.
+- name: GenerativeAgentSignalAuthenticationRequested
+  fields: 4
+- name: GenerativeAgentSignalProcessingEnd
+  fields: 4
+- name: GenerativeAgentSignalProcessingStart
+  fields: 4
+- name: GenerativeAgentSignalReply
+  fields: 5
+- name: GenerativeAgentSignalTransferToAgent
+  fields: 4
+- name: GetFeedFileRequest
+  fields: 6
+  description: Get file for a company feed/version/format/interval/file
+- name: GetFeedFileResponse
+  fields: 7
+  description: Get a presigned url for a file
+- name: GetMessageResponse
+  fields: 5
+  description: Response for GetMessage
+- name: GetMessagesResponse
+  fields: 1
+  description: Response for GetMessages
+- name: GetTwilioMediaStreamsResponse
+  fields: 1
+- name: GlobalResponsesVersion
+  fields: 2
+- name: GlobalResponsesWithVersion
+  fields: 2
+- name: IntentResponse
+  fields: 2
+- name: IntentResult
+  fields: 2
+- name: ListFeedDatesRequest
+  fields: 3
+  description: Get dates for a company feed/version/format
+- name: ListFeedDatesResponse
+  fields: 4
+  description: Get Dates for a company feed/version/format
+- name: ListFeedFilesRequest
+  fields: 5
+  description: Get files for a company feed/version/format/date/interval
+- name: ListFeedFilesResponse
+  fields: 6
+  description: Get files for a company feed/version/format/date/interval
+- name: ListFeedFormatsRequest
+  fields: 2
+  description: Get format for a company feed/version
+- name: ListFeedFormatsResponse
+  fields: 3
+  description: Get formats for a company feed
+- name: ListFeedIntervalsRequest
+  fields: 4
+  description: Get intervals for a company feed/version/format/date
+- name: ListFeedIntervalsResponse
+  fields: 5
+  description: Get Dates for a company feed/version/format
+- name: ListFeedVersionsRequest
+  fields: 1
+  description: Get versions for a company feed
+- name: ListFeedVersionsResponse
+  fields: 2
+  description: Get versions for a company feed
+- name: ListFeedsResponse
+  fields: 1
+  description: Get feed names for a company
+- name: Message
+  fields: 3
+  description: Represents a single message within a conversation.
+- name: MessageAnalyticEvent
+  fields: 7
+  description: Analytics event reporting actions the agent performed while composing a message.
+- name: MessageSentEvent
+  fields: 13
+  description: Analytics event describing the agent's usage of AutoCompose features while composing a message (we
+    sometimes refer to these as augmentation features, because they augment the agent's work).
+- name: MessageSentStatus
+  fields: 2
+  description: A response with the status of a sent message
+- name: MessagesResponse
+  fields: 1
+  description: Response for messages
+- name: Metadata
+  fields: 2
+  description: A key-value pair providing additional information about the article.
+- name: NewCustomResponse
+  fields: 4
+- name: NotFoundResponse
+  fields: 1
+  description: Not Found response
+- name: Participant
+  fields: 2
+  description: Represents a participant in the conversation.
+- name: PhraseCompletion
+  fields: 1
+  description: Completion of the phrase the agent is currently typing, to be displayed inline in the composer
+- name: ProfanityResult
+  fields: 1
+  description: ProfanityResult
+- name: RequestEntityTooLargeResponse
+  fields: 1
+  description: Request Entity Too Large response
+- name: Response
+  fields: 5
+- name: Responses
+  fields: 3
+  description: A set of responses and folders for an agent
+- name: ServiceUnavailableResponse
+  fields: 1
+  description: Service Unavailable response
+- name: Settings
+  fields: 5
+- name: SpellcheckCorrection
+  fields: 4
+- name: SpellcheckQuery
+  fields: 3
+- name: StartStreamingAmazonConnectParams
+  fields: 3
+- name: StartStreamingAutotranscribeParams
+  fields: 4
+- name: StartStreamingAutotranscribeResponse
+  fields: 2
+- name: StartStreamingAutotranscribeResponseDetails
+  fields: 2
+- name: StartStreamingRequest
+  fields: 8
+- name: StartStreamingResponse
+  fields: 3
+- name: StartStreamingSiprecParams
+  fields: 1
+- name: StartStreamingTwilioParams
+  fields: 1
+- name: StopStreamingAutotranscribeResponse
+  fields: 2
+- name: StopStreamingAutotranscribeResponseDetails
+  fields: 3
+- name: StopStreamingRequest
+  fields: 2
+- name: StopStreamingResponse
+  fields: 3
+- name: StopStreamingResponseSummary
+  fields: 4
+- name: StreamingUrl
+  fields: 1
+  description: Get streaming url
+- name: StructuredDataRequest
+  fields: 0
+- name: StructuredDataResponse
+  fields: 3
+- name: Submission
+  fields: 10
+  description: Information about a successfully submitted proposal to update an article in the Knowledge Base.
+- name: SubmissionRequest
+  fields: 7
+  description: A proposal for creating a new article or updating an existing one in the Knowledge Base.
+- name: Suggestion
+  fields: 3
+  description: Suggestion
+- name: Suggestions
+  fields: 5
+  description: Suggestions for next agent message
+- name: SuggestionsRequest
+  fields: 2
+  description: A suggestions request with an optional message to add to the conversation
+- name: TimeBasedConversation
+  fields: 6
+  description: Conversation between an agent and a customer that requires a timestamp of creation
+- name: TooManyRequestsResponse
+  fields: 1
+  description: Too Many Requests response
+- name: TwilioTrackMap
+  fields: 2
+- name: UnauthorizedResponse
+  fields: 1
+  description: Unauthorized response
+- name: UnprocessableEntity
+  fields: 1
+  description: Unprocessable Entity response
+- name: health-check
+  fields: 1
+  description: Response for health check.
+relationships:
+- from: Suggestions
+  to: MessagesResponse
+  type: has_one
+  via: message
+- from: Suggestions
+  to: Suggestion
+  type: has_many
+  via: suggestions
+- from: Suggestions
+  to: PhraseCompletion
+  type: has_one
+  via: phraseCompletion
+- from: Suggestions
+  to: AutopilotMessage
+  type: has_one
+  via: autopilotMessage
+- from: MessageSentEvent
+  to: Conversation
+  type: belongs_to
+  via: conversationId
+- from: MessageSentEvent
+  to: Message
+  type: belongs_to
+  via: messageId
+- from: MessageAnalyticEvent
+  to: Suggestions
+  type: belongs_to
+  via: suggestionsId
+- from: Response
+  to: Folder
+  type: belongs_to
+  via: folderId
+- from: NewCustomResponse
+  to: Folder
+  type: belongs_to
+  via: folderId
+- from: Responses
+  to: Response
+  type: has_many
+  via: responsesList
+- from: Responses
+  to: Folder
+  type: has_many
+  via: folderList
+- from: GlobalResponsesWithVersion
+  to: Responses
+  type: has_one
+  via: responses
+- from: GlobalResponsesWithVersion
+  to: GlobalResponsesVersion
+  type: has_one
+  via: version
+- from: SuggestionsRequest
+  to: Message
+  type: has_one
+  via: message
+- from: Message
+  to: Participant
+  type: has_one
+  via: sender
+- from: DefaultErrorResponse
+  to: DefaultErrorDetails
+  type: has_one
+  via: error
+- from: BadRequestResponse
+  to: DefaultErrorDetails
+  type: has_one
+  via: error
+- from: UnauthorizedResponse
+  to: DefaultErrorDetails
+  type: has_one
+  via: error
+- from: ForbiddenResponse
+  to: DefaultErrorDetails
+  type: has_one
+  via: error
+- from: NotFoundResponse
+  to: DefaultErrorDetails
+  type: has_one
+  via: error
+- from: ConflictResponse
+  to: DefaultErrorDetails
+  type: has_one
+  via: error
+- from: RequestEntityTooLargeResponse
+  to: DefaultErrorDetails
+  type: has_one
+  via: error
+- from: UnprocessableEntity
+  to: DefaultErrorDetails
+  type: has_one
+  via: error
+- from: TooManyRequestsResponse
+  to: DefaultErrorDetails
+  type: has_one
+  via: error
+- from: ServiceUnavailableResponse
+  to: DefaultErrorDetails
+  type: has_one
+  via: error
+- from: FreeTextSummaryResponse
+  to: Conversation
+  type: belongs_to
+  via: conversationId
+- from: StructuredDataResponse
+  to: Conversation
+  type: belongs_to
+  via: conversationId
+- from: IntentResponse
+  to: Conversation
+  type: belongs_to
+  via: conversationId
+- from: IntentResponse
+  to: IntentResult
+  type: has_one
+  via: intent
+- from: BatchMessages
+  to: Message
+  type: has_many
+  via: messages
+- from: Conversations
+  to: Conversation
+  type: has_many
+  via: items
+- from: GetMessageResponse
+  to: Message
+  type: belongs_to
+  via: messageId
+- from: GenerativeAgentSignalReply
+  to: Conversation
+  type: belongs_to
+  via: conversationId
+- from: GenerativeAgentSignalProcessingStart
+  to: Conversation
+  type: belongs_to
+  via: conversationId
+- from: GenerativeAgentSignalProcessingEnd
+  to: Conversation
+  type: belongs_to
+  via: conversationId
+- from: GenerativeAgentSignalAuthenticationRequested
+  to: Conversation
+  type: belongs_to
+  via: conversationId
+- from: GenerativeAgentSignalTransferToAgent
+  to: Conversation
+  type: belongs_to
+  via: conversationId
+- from: SubmissionRequest
+  to: Article
+  type: belongs_to
+  via: articleId
+- from: SubmissionRequest
+  to: Metadata
+  type: has_many
+  via: metadata
+- from: SubmissionRequest
+  to: AdditionalInstruction
+  type: has_many
+  via: additionalInstructions
+- from: Submission
+  to: Article
+  type: belongs_to
+  via: articleId
+- from: Submission
+  to: Metadata
+  type: has_many
+  via: metadata
+- from: Submission
+  to: AdditionalInstruction
+  type: has_many
+  via: additionalInstructions
+- from: Article
+  to: Metadata
+  type: has_many
+  via: metadata
+- from: Article
+  to: AdditionalInstruction
+  type: has_many
+  via: additionalInstructions
+- from: AgentMetadata
+  to: Attribute
+  type: has_many
+  via: attributes
+- from: AgentMetadataMany
+  to: AgentMetadata
+  type: has_many
+  via: items
+- from: ConversationMetadata
+  to: Attribute
+  type: has_many
+  via: attributes
+- from: ConversationMetadataMany
+  to: ConversationMetadata
+  type: has_many
+  via: items
+- from: CustomerMetadata
+  to: Attribute
+  type: has_many
+  via: attributes
+- from: CustomerMetadataMany
+  to: CustomerMetadata
+  type: has_many
+  via: items
+- from: AddMetadataResponse
+  to: MessageSentStatus
+  type: has_one
+  via: result
+- from: AddManyMetadataResponse
+  to: MessageSentStatus
+  type: has_many
+  via: results
+- from: StartStreamingRequest
+  to: StartStreamingAutotranscribeParams
+  type: has_one
+  via: autotranscribeParams
+- from: StartStreamingRequest
+  to: StartStreamingSiprecParams
+  type: has_one
+  via: siprecParams
+- from: StartStreamingRequest
+  to: StartStreamingTwilioParams
+  type: has_one
+  via: twilioParams
+- from: StartStreamingRequest
+  to: StartStreamingAmazonConnectParams
+  type: has_one
+  via: amazonConnectParams
+- from: StartStreamingTwilioParams
+  to: TwilioTrackMap
+  type: has_one
+  via: trackMap
+- from: StartStreamingResponse
+  to: StartStreamingAutotranscribeResponse
+  type: has_one
+  via: autotranscribeResponse
+- from: StartStreamingAutotranscribeResponse
+  to: StartStreamingAutotranscribeResponseDetails
+  type: has_one
+  via: customer
+- from: StartStreamingAutotranscribeResponse
+  to: StartStreamingAutotranscribeResponseDetails
+  type: has_one
+  via: agent
+- from: StartStreamingAutotranscribeResponseDetails
+  to: AutotranscribeResponseStatus
+  type: has_one
+  via: status
+- from: StopStreamingResponse
+  to: StopStreamingAutotranscribeResponse
+  type: has_one
+  via: autotranscribeResponse
+- from: StopStreamingAutotranscribeResponse
+  to: StopStreamingAutotranscribeResponseDetails
+  type: has_one
+  via: customer
+- from: StopStreamingAutotranscribeResponse
+  to: StopStreamingAutotranscribeResponseDetails
+  type: has_one
+  via: agent
+- from: StopStreamingAutotranscribeResponseDetails
+  to: AutotranscribeResponseStatus
+  type: has_one
+  via: status
+- from: StopStreamingAutotranscribeResponseDetails
+  to: StopStreamingResponseSummary
+  type: has_one
+  via: summary
