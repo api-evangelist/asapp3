@@ -1,7 +1,7 @@
 {
   "provider": "asapp3",
   "sources": [
-    "asapp3-openapi.yaml"
+    "_original/asapp3-openapi.yaml"
   ],
   "outputs": [
     "asapp3-autocompose-api-openapi.yml",
@@ -15,14 +15,24 @@
     "asapp3-knowledge-base-api-openapi.yml",
     "asapp3-metadata-api-openapi.yml"
   ],
-  "archived": [
-    "archived openapi/asapp3-openapi.yaml"
-  ],
+  "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "asapp3-openapi.yaml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
-    "apis.yml register: written (+10 apis, 10 total)"
+    "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "asapp3-autocompose-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "asapp3-autosummary-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "asapp3-autotranscribe-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "asapp3-autotranscribe-media-gateway-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "asapp3-conversations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "asapp3-file-exporter-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "asapp3-generativeagent-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "asapp3-health-check-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "asapp3-knowledge-base-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "asapp3-metadata-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -54,127 +54,17 @@ paths:
       operationId: getV1Health
       x-operation-id-source: derived
 components:
-  responses:
-    BadRequest:
-      description: 400 - Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BadRequestResponse'
-    TooManyRequests:
-      description: 429 - Too Many Requests
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/TooManyRequestsResponse'
-    DefaultError:
-      description: 500 - Internal Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DefaultErrorResponse'
-    NotFound:
-      description: 404 - Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/NotFoundResponse'
-    RequestEntityTooLarge:
-      description: 413 - Request Entity Too Large
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RequestEntityTooLargeResponse'
-    ServiceUnavailable:
-      description: 503 - Service Unavailable
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ServiceUnavailableResponse'
-    UnprocessableEntity:
-      description: 422 - Unprocessable Entity
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UnprocessableEntity'
-    Forbidden:
-      description: 403 - Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ForbiddenResponse'
-    Unauthorized:
-      description: 401 - Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UnauthorizedResponse'
-    Conflict:
-      description: 409 - Conflict
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ConflictResponse'
   schemas:
-    health-check:
-      description: Response for health check.
-      type: object
-      properties:
-        healthCheck:
-          type: string
-          description: Health Check status of the ASAPP services.
-      example:
-        healthCheck: SUCCESS
-    BadRequestResponse:
-      description: Bad request response
+    UnprocessableEntity:
+      description: Unprocessable Entity response
       type: object
       properties:
         error:
           $ref: '#/components/schemas/DefaultErrorDetails'
           example:
             requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 400-01
-            message: Bad request
-    TooManyRequestsResponse:
-      description: Too Many Requests response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 429-01
-            message: Too Many Requests
-    NotFoundResponse:
-      description: Not Found response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 404-01
-            message: Not Found
-    ForbiddenResponse:
-      description: Forbidden response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 403-01
-            message: Forbidden Response
-    UnauthorizedResponse:
-      description: Unauthorized response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 401-01
-            message: Unauthorized
+            code: 422-01
+            message: Unprocessable Entity
     ServiceUnavailableResponse:
       description: Service Unavailable response
       type: object
@@ -185,6 +75,85 @@ components:
             requestId: 8e033668-9f1a-11ec-b909-0242ac120002
             code: 503-01
             message: Service Unavailable
+    DefaultErrorResponse:
+      description: Default error response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 500-01
+            message: Internal server error
+    ForbiddenResponse:
+      description: Forbidden response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 403-01
+            message: Forbidden Response
+    ConflictResponse:
+      description: Conflict response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 409-01
+            message: Conflict
+    TooManyRequestsResponse:
+      description: Too Many Requests response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 429-01
+            message: Too Many Requests
+    BadRequestResponse:
+      description: Bad request response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 400-01
+            message: Bad request
+    health-check:
+      description: Response for health check.
+      type: object
+      properties:
+        healthCheck:
+          type: string
+          description: Health Check status of the ASAPP services.
+      example:
+        healthCheck: SUCCESS
+    NotFoundResponse:
+      description: Not Found response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 404-01
+            message: Not Found
+    UnauthorizedResponse:
+      description: Unauthorized response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 401-01
+            message: Unauthorized
     DefaultErrorDetails:
       description: Error details
       type: object
@@ -201,36 +170,6 @@ components:
       required:
       - requestId
       - message
-    DefaultErrorResponse:
-      description: Default error response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 500-01
-            message: Internal server error
-    UnprocessableEntity:
-      description: Unprocessable Entity response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 422-01
-            message: Unprocessable Entity
-    ConflictResponse:
-      description: Conflict response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 409-01
-            message: Conflict
     RequestEntityTooLargeResponse:
       description: Request Entity Too Large response
       type: object
@@ -241,6 +180,67 @@ components:
             requestId: 8e033668-9f1a-11ec-b909-0242ac120002
             code: 413-01
             message: Request Entity Too Large
+  responses:
+    TooManyRequests:
+      description: 429 - Too Many Requests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TooManyRequestsResponse'
+    NotFound:
+      description: 404 - Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NotFoundResponse'
+    DefaultError:
+      description: 500 - Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DefaultErrorResponse'
+    UnprocessableEntity:
+      description: 422 - Unprocessable Entity
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UnprocessableEntity'
+    BadRequest:
+      description: 400 - Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BadRequestResponse'
+    Unauthorized:
+      description: 401 - Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UnauthorizedResponse'
+    RequestEntityTooLarge:
+      description: 413 - Request Entity Too Large
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RequestEntityTooLargeResponse'
+    ServiceUnavailable:
+      description: 503 - Service Unavailable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ServiceUnavailableResponse'
+    Conflict:
+      description: 409 - Conflict
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ConflictResponse'
+    Forbidden:
+      description: 403 - Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ForbiddenResponse'
   securitySchemes:
     API-ID:
       type: apiKey

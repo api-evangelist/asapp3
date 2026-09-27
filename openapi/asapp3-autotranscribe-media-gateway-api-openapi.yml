@@ -138,71 +138,16 @@ paths:
         API-Secret: []
 components:
   schemas:
-    AutotranscribeResponseStatus:
-      type: object
-      properties:
-        code:
-          type: integer
-          example: 1000
-        description:
-          type: string
-          example: OK
-    SiprecMediaLineOrder:
-      description: 'Defines the mapping of media lines (m-lines) in SDP of SIPREC protocol.
-
-        - `CUSTOMER_FIRST` will map top audio m-line to customer side of conversation (usual for inbound calls to call center, default)
-
-        - `AGENT_FIRST` will map top audio m-line to agent side of the conversation (usual for outbound calls from call center)
-
-        '
-      type: string
-      default: CUSTOMER_FIRST
-      enum:
-      - CUSTOMER_FIRST
-      - AGENT_FIRST
-    StartStreamingAutotranscribeResponse:
-      type: object
-      properties:
-        customer:
-          $ref: '#/components/schemas/StartStreamingAutotranscribeResponseDetails'
-        agent:
-          $ref: '#/components/schemas/StartStreamingAutotranscribeResponseDetails'
-    StopStreamingAutotranscribeResponse:
-      type: object
-      properties:
-        customer:
-          $ref: '#/components/schemas/StopStreamingAutotranscribeResponseDetails'
-        agent:
-          $ref: '#/components/schemas/StopStreamingAutotranscribeResponseDetails'
-    StopStreamingResponse:
-      type: object
-      properties:
-        autotranscribeResponse:
-          $ref: '#/components/schemas/StopStreamingAutotranscribeResponse'
-        isOk:
-          type: boolean
-        errorMessage:
-          type: string
-    BadRequestResponse:
-      description: Bad request response
+    UnprocessableEntity:
+      description: Unprocessable Entity response
       type: object
       properties:
         error:
           $ref: '#/components/schemas/DefaultErrorDetails'
           example:
             requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 400-01
-            message: Bad request
-    StopStreamingAutotranscribeResponseDetails:
-      type: object
-      properties:
-        streamId:
-          type: string
-          example: 5ce2b755-3f38-11ed-b755-7aed4b5c38d5
-        status:
-          $ref: '#/components/schemas/AutotranscribeResponseStatus'
-        summary:
-          $ref: '#/components/schemas/StopStreamingResponseSummary'
+            code: 422-01
+            message: Unprocessable Entity
     TwilioTrackMap:
       type: object
       properties:
@@ -220,71 +165,6 @@ components:
           enum:
           - customer
           - agent
-    TooManyRequestsResponse:
-      description: Too Many Requests response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 429-01
-            message: Too Many Requests
-    StartStreamingTwilioParams:
-      type: object
-      properties:
-        trackMap:
-          $ref: '#/components/schemas/TwilioTrackMap'
-      example:
-        trackMap:
-          inbound: customer
-          outbound: agent
-    StartStreamingAmazonConnectParams:
-      type: object
-      properties:
-        streamArn:
-          type: string
-          description: Amazon stream arn
-        startSelectorType:
-          type: string
-          description: Identifies the fragment on the Kinesis video stream where you want to start getting the data from
-          enum:
-          - NOW
-          - FRAGMENT_NUMBER
-        afterFragmentNumber:
-          type: string
-          description: Amazon fragment number from where you want to start returning the fragments - mandatory if startSelectorType is FRAGMENT_NUMBER
-      example:
-        streamArn: arn:aws:kinesisvideo:us-east-1:000000000000:stream/streamtest-connect-asappconnect-contact-1117e864-690f-4e1e-9dcf-6fbfcc288e41/1654194145007
-        startSelectorType: FRAGMENT_NUMBER
-        afterFragmentNumber: '91343852333181476958523476930058290730435475343'
-    NotFoundResponse:
-      description: Not Found response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 404-01
-            message: Not Found
-    StopStreamingRequest:
-      type: object
-      properties:
-        namespace:
-          description: The media gateway platform or protocol you are using.
-          type: string
-          enum:
-          - siprec
-          - twilio
-          - amazonconnect
-          - genesysaudiohook
-        guid:
-          description: The globally unique Id for the call, also sometimes called Unique Call Id (UCID). Must be in decimal form.
-          type: string
-      example:
-        namespace: siprec
-        guid: 0867617078-0032318833-2221801472-0002236962
     StartStreamingAutotranscribeParams:
       type: object
       properties:
@@ -325,16 +205,66 @@ components:
         detailedToken: false
         audioRecordingAllowed: false
         redactionOutput: redacted
-    ForbiddenResponse:
-      description: Forbidden response
+    StartStreamingSiprecParams:
+      type: object
+      properties:
+        mediaLineOrder:
+          $ref: '#/components/schemas/SiprecMediaLineOrder'
+    StopStreamingResponseSummary:
+      type: object
+      properties:
+        totalAudioBytes:
+          type: integer
+        audioDurationMs:
+          type: integer
+        streamingSeconds:
+          type: integer
+        transcripts:
+          type: integer
+      example:
+        totalAudioBytes: 1334720
+        audioDurationMs: 83420
+        streamingSeconds: 84
+        transcripts: 2
+    StartStreamingTwilioParams:
+      type: object
+      properties:
+        trackMap:
+          $ref: '#/components/schemas/TwilioTrackMap'
+      example:
+        trackMap:
+          inbound: customer
+          outbound: agent
+    ServiceUnavailableResponse:
+      description: Service Unavailable response
       type: object
       properties:
         error:
           $ref: '#/components/schemas/DefaultErrorDetails'
           example:
             requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 403-01
-            message: Forbidden Response
+            code: 503-01
+            message: Service Unavailable
+    DefaultErrorResponse:
+      description: Default error response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 500-01
+            message: Internal server error
+    StopStreamingAutotranscribeResponseDetails:
+      type: object
+      properties:
+        streamId:
+          type: string
+          example: 5ce2b755-3f38-11ed-b755-7aed4b5c38d5
+        status:
+          $ref: '#/components/schemas/AutotranscribeResponseStatus'
+        summary:
+          $ref: '#/components/schemas/StopStreamingResponseSummary'
     StartStreamingResponse:
       type: object
       properties:
@@ -357,6 +287,86 @@ components:
             status:
               code: 1000
               description: OK
+    ForbiddenResponse:
+      description: Forbidden response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 403-01
+            message: Forbidden Response
+    AutotranscribeResponseStatus:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 1000
+        description:
+          type: string
+          example: OK
+    GetTwilioMediaStreamsResponse:
+      type: object
+      properties:
+        streamingUrl:
+          description: The websocket URL you provide to Twilio for media streaming.
+          type: string
+          example: wss://localhost/mg-twilio-autotranscribe/twilio-media/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+    ConflictResponse:
+      description: Conflict response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 409-01
+            message: Conflict
+    StopStreamingRequest:
+      type: object
+      properties:
+        namespace:
+          description: The media gateway platform or protocol you are using.
+          type: string
+          enum:
+          - siprec
+          - twilio
+          - amazonconnect
+          - genesysaudiohook
+        guid:
+          description: The globally unique Id for the call, also sometimes called Unique Call Id (UCID). Must be in decimal form.
+          type: string
+      example:
+        namespace: siprec
+        guid: 0867617078-0032318833-2221801472-0002236962
+    TooManyRequestsResponse:
+      description: Too Many Requests response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 429-01
+            message: Too Many Requests
+    BadRequestResponse:
+      description: Bad request response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 400-01
+            message: Bad request
+    StopStreamingAutotranscribeResponse:
+      type: object
+      properties:
+        customer:
+          $ref: '#/components/schemas/StopStreamingAutotranscribeResponseDetails'
+        agent:
+          $ref: '#/components/schemas/StopStreamingAutotranscribeResponseDetails'
     StartStreamingRequest:
       type: object
       properties:
@@ -399,22 +409,32 @@ components:
           language: en-US
         siprecParams:
           mediaLineOrder: CUSTOMER_FIRST
-    StopStreamingResponseSummary:
+    StopStreamingResponse:
       type: object
       properties:
-        totalAudioBytes:
-          type: integer
-        audioDurationMs:
-          type: integer
-        streamingSeconds:
-          type: integer
-        transcripts:
-          type: integer
-      example:
-        totalAudioBytes: 1334720
-        audioDurationMs: 83420
-        streamingSeconds: 84
-        transcripts: 2
+        autotranscribeResponse:
+          $ref: '#/components/schemas/StopStreamingAutotranscribeResponse'
+        isOk:
+          type: boolean
+        errorMessage:
+          type: string
+    StartStreamingAutotranscribeResponse:
+      type: object
+      properties:
+        customer:
+          $ref: '#/components/schemas/StartStreamingAutotranscribeResponseDetails'
+        agent:
+          $ref: '#/components/schemas/StartStreamingAutotranscribeResponseDetails'
+    NotFoundResponse:
+      description: Not Found response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 404-01
+            message: Not Found
     UnauthorizedResponse:
       description: Unauthorized response
       type: object
@@ -425,28 +445,14 @@ components:
             requestId: 8e033668-9f1a-11ec-b909-0242ac120002
             code: 401-01
             message: Unauthorized
-    GetTwilioMediaStreamsResponse:
+    StartStreamingAutotranscribeResponseDetails:
       type: object
       properties:
-        streamingUrl:
-          description: The websocket URL you provide to Twilio for media streaming.
+        streamId:
           type: string
-          example: wss://localhost/mg-twilio-autotranscribe/twilio-media/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
-    StartStreamingSiprecParams:
-      type: object
-      properties:
-        mediaLineOrder:
-          $ref: '#/components/schemas/SiprecMediaLineOrder'
-    ServiceUnavailableResponse:
-      description: Service Unavailable response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 503-01
-            message: Service Unavailable
+          example: 5ce2b755-3f38-11ed-b755-7aed4b5c38d5
+        status:
+          $ref: '#/components/schemas/AutotranscribeResponseStatus'
     DefaultErrorDetails:
       description: Error details
       type: object
@@ -463,44 +469,6 @@ components:
       required:
       - requestId
       - message
-    StartStreamingAutotranscribeResponseDetails:
-      type: object
-      properties:
-        streamId:
-          type: string
-          example: 5ce2b755-3f38-11ed-b755-7aed4b5c38d5
-        status:
-          $ref: '#/components/schemas/AutotranscribeResponseStatus'
-    DefaultErrorResponse:
-      description: Default error response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 500-01
-            message: Internal server error
-    UnprocessableEntity:
-      description: Unprocessable Entity response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 422-01
-            message: Unprocessable Entity
-    ConflictResponse:
-      description: Conflict response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 409-01
-            message: Conflict
     RequestEntityTooLargeResponse:
       description: Request Entity Too Large response
       type: object
@@ -511,31 +479,75 @@ components:
             requestId: 8e033668-9f1a-11ec-b909-0242ac120002
             code: 413-01
             message: Request Entity Too Large
+    SiprecMediaLineOrder:
+      description: 'Defines the mapping of media lines (m-lines) in SDP of SIPREC protocol.
+
+        - `CUSTOMER_FIRST` will map top audio m-line to customer side of conversation (usual for inbound calls to call center, default)
+
+        - `AGENT_FIRST` will map top audio m-line to agent side of the conversation (usual for outbound calls from call center)
+
+        '
+      type: string
+      default: CUSTOMER_FIRST
+      enum:
+      - CUSTOMER_FIRST
+      - AGENT_FIRST
+    StartStreamingAmazonConnectParams:
+      type: object
+      properties:
+        streamArn:
+          type: string
+          description: Amazon stream arn
+        startSelectorType:
+          type: string
+          description: Identifies the fragment on the Kinesis video stream where you want to start getting the data from
+          enum:
+          - NOW
+          - FRAGMENT_NUMBER
+        afterFragmentNumber:
+          type: string
+          description: Amazon fragment number from where you want to start returning the fragments - mandatory if startSelectorType is FRAGMENT_NUMBER
+      example:
+        streamArn: arn:aws:kinesisvideo:us-east-1:000000000000:stream/streamtest-connect-asappconnect-contact-1117e864-690f-4e1e-9dcf-6fbfcc288e41/1654194145007
+        startSelectorType: FRAGMENT_NUMBER
+        afterFragmentNumber: '91343852333181476958523476930058290730435475343'
   responses:
-    BadRequest:
-      description: 400 - Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BadRequestResponse'
     TooManyRequests:
       description: 429 - Too Many Requests
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/TooManyRequestsResponse'
-    DefaultError:
-      description: 500 - Internal Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DefaultErrorResponse'
     NotFound:
       description: 404 - Not Found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/NotFoundResponse'
+    DefaultError:
+      description: 500 - Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DefaultErrorResponse'
+    UnprocessableEntity:
+      description: 422 - Unprocessable Entity
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UnprocessableEntity'
+    BadRequest:
+      description: 400 - Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BadRequestResponse'
+    Unauthorized:
+      description: 401 - Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UnauthorizedResponse'
     RequestEntityTooLarge:
       description: 413 - Request Entity Too Large
       content:
@@ -548,30 +560,18 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ServiceUnavailableResponse'
-    UnprocessableEntity:
-      description: 422 - Unprocessable Entity
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UnprocessableEntity'
-    Forbidden:
-      description: 403 - Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ForbiddenResponse'
-    Unauthorized:
-      description: 401 - Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UnauthorizedResponse'
     Conflict:
       description: 409 - Conflict
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ConflictResponse'
+    Forbidden:
+      description: 403 - Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ForbiddenResponse'
   securitySchemes:
     API-ID:
       type: apiKey

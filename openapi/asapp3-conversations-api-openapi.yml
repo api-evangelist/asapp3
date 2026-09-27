@@ -408,17 +408,25 @@ paths:
         API-Secret: []
 components:
   schemas:
-    ParticipantRole:
-      description: 'A participant role, usually the customer or an agent for human participants. System participant is also allowed but keep in mind
-
-        that this role won''t be considered a participant in a conversation, just a message sender.
-
-        '
-      type: string
-      enum:
-      - agent
-      - customer
-      - system
+    UnprocessableEntity:
+      description: Unprocessable Entity response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 422-01
+            message: Unprocessable Entity
+    ConversationResponse:
+      description: Response for conversation
+      type: object
+      properties:
+        id:
+          type: string
+          description: The identifier of the conversation.
+      example:
+        id: 01BX5ZZKBKACTAV9WEVGEMMVRZ
     GetMessageResponse:
       description: Response for GetMessage
       type: object
@@ -466,24 +474,82 @@ components:
         messageId: 01GMXE90AEV7H3J4DPBDKB1R79
         createdTimestamp: '2021-11-23T12:13:16.853Z'
         clientTimestamp: '2021-11-23T12:13:14.555Z'
-    Conversations:
-      description: A list of conversations
+    GetMessagesResponse:
+      description: Response for GetMessages
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/Conversation'
-    BadRequestResponse:
-      description: Bad request response
+            description: A message sent by a participant of a conversation
+            type: object
+            properties:
+              text:
+                type: string
+                minLength: 1
+                description: Text sent
+              sender:
+                description: A participant within a conversation
+                type: object
+                properties:
+                  role:
+                    $ref: '#/components/schemas/ParticipantRole'
+                  externalId:
+                    type:
+                    - string
+                    - 'null'
+                    description: The unique identifier for the relevant participant role.
+                required:
+                - role
+              messageId:
+                type: string
+                minLength: 1
+                description: The identifier of the message.
+              createdTimestamp:
+                type: string
+                format: date-time
+                description: The time when the message objectwas created in the ASAPP system.
+              clientTimestamp:
+                type: string
+                format: date-time
+                description: The timestamp of when the message was sent.
+            required:
+            - text
+            - sender
+            - messageId
+            - createdTimestamp
+            - clientTimestamp
+            example:
+              text: Hello, I would like to upgrade my internet plan to GOLD.
+              sender:
+                role: customer
+                externalId: '123456'
+              messageId: 01GMXE90AEV7H3J4DPBDKB1R79
+              createdTimestamp: '2021-11-23T12:13:16.853Z'
+              clientTimestamp: '2021-11-23T12:13:14.555Z'
+    ServiceUnavailableResponse:
+      description: Service Unavailable response
       type: object
       properties:
         error:
           $ref: '#/components/schemas/DefaultErrorDetails'
           example:
             requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 400-01
-            message: Bad request
+            code: 503-01
+            message: Service Unavailable
+    Participant:
+      description: Represents a participant in the conversation.
+      type: object
+      properties:
+        role:
+          $ref: '#/components/schemas/ParticipantRole'
+          description: The role of the participant in the conversation.
+        externalId:
+          type: string
+          description: The unique identifier for the participant in your external system. This should be consistent across all interactions for the same individual.
+      required:
+      - role
+      - externalId
     Conversation:
       description: Represents a conversation between an agent and a customer.
       type: object
@@ -539,6 +605,114 @@ components:
           organizationalGroup: some-group
           subdivision: some-division
           queue: some-queue
+    DefaultErrorResponse:
+      description: Default error response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 500-01
+            message: Internal server error
+    ForbiddenResponse:
+      description: Forbidden response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 403-01
+            message: Forbidden Response
+    ConflictResponse:
+      description: Conflict response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 409-01
+            message: Conflict
+    ParticipantRole:
+      description: 'A participant role, usually the customer or an agent for human participants. System participant is also allowed but keep in mind
+
+        that this role won''t be considered a participant in a conversation, just a message sender.
+
+        '
+      type: string
+      enum:
+      - agent
+      - customer
+      - system
+    TooManyRequestsResponse:
+      description: Too Many Requests response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 429-01
+            message: Too Many Requests
+    BadRequestResponse:
+      description: Bad request response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 400-01
+            message: Bad request
+    BatchMessages:
+      description: A batch of messages for conversation
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+          minItems: 1
+          maxItems: 300
+      example:
+        messages:
+        - text: Hello, I would like to upgrade my internet plan to GOLD.
+          sender:
+            role: customer
+            externalId: customer-xyz
+          timestamp: '2021-11-23T12:13:14.555Z'
+        - text: Let me help you with that
+          sender:
+            role: agent
+            externalId: agent-111
+          timestamp: '2021-11-23T12:13:16.666Z'
+    Message:
+      description: Represents a single message within a conversation.
+      type: object
+      properties:
+        text:
+          type: string
+          minLength: 1
+          description: The content of the message.
+        sender:
+          $ref: '#/components/schemas/Participant'
+          description: Information about the participant who sent the message.
+        timestamp:
+          type: string
+          format: date-time
+          description: The time when the message was sent. Include the timezone, otherwise UTC will be assumed.
+      required:
+      - text
+      - sender
+      - timestamp
+      example:
+        text: Hello, I would like to upgrade my internet plan to GOLD.
+        sender:
+          role: agent
+          externalId: 123
+        timestamp: '2021-11-23T12:13:14.555Z'
     TimeBasedConversation:
       description: Conversation between an agent and a customer that requires a timestamp of creation
       type: object
@@ -599,29 +773,6 @@ components:
           subdivision: some-division
           queue: some-queue
         timestamp: '2021-11-23T12:13:14.555Z'
-    Participant:
-      description: Represents a participant in the conversation.
-      type: object
-      properties:
-        role:
-          $ref: '#/components/schemas/ParticipantRole'
-          description: The role of the participant in the conversation.
-        externalId:
-          type: string
-          description: The unique identifier for the participant in your external system. This should be consistent across all interactions for the same individual.
-      required:
-      - role
-      - externalId
-    TooManyRequestsResponse:
-      description: Too Many Requests response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 429-01
-            message: Too Many Requests
     NotFoundResponse:
       description: Not Found response
       type: object
@@ -632,16 +783,6 @@ components:
             requestId: 8e033668-9f1a-11ec-b909-0242ac120002
             code: 404-01
             message: Not Found
-    ForbiddenResponse:
-      description: Forbidden response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 403-01
-            message: Forbidden Response
     UnauthorizedResponse:
       description: Unauthorized response
       type: object
@@ -652,6 +793,25 @@ components:
             requestId: 8e033668-9f1a-11ec-b909-0242ac120002
             code: 401-01
             message: Unauthorized
+    BatchMessagesResponse:
+      description: Response for batch messages
+      type: object
+    DefaultErrorDetails:
+      description: Error details
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: Unique ID of the failing request
+        message:
+          type: string
+          description: Error message
+        code:
+          type: string
+          description: Error code
+      required:
+      - requestId
+      - message
     AuthObject:
       type: object
       description: Contains authentication information for a customer in a conversation.
@@ -687,18 +847,6 @@ components:
       example:
         customerExternalId: customer-xyz
         token: cGFzc3dvcmQ=
-    ConversationResponse:
-      description: Response for conversation
-      type: object
-      properties:
-        id:
-          type: string
-          description: The identifier of the conversation.
-      example:
-        id: 01BX5ZZKBKACTAV9WEVGEMMVRZ
-    BatchMessagesResponse:
-      description: Response for batch messages
-      type: object
     MessagesResponse:
       description: Response for messages
       type: object
@@ -708,162 +856,6 @@ components:
           description: Message ID to be used for analytics
       example:
         id: 01BX5ZZKBKACTAV9WEVGEMMVS1
-    Message:
-      description: Represents a single message within a conversation.
-      type: object
-      properties:
-        text:
-          type: string
-          minLength: 1
-          description: The content of the message.
-        sender:
-          $ref: '#/components/schemas/Participant'
-          description: Information about the participant who sent the message.
-        timestamp:
-          type: string
-          format: date-time
-          description: The time when the message was sent. Include the timezone, otherwise UTC will be assumed.
-      required:
-      - text
-      - sender
-      - timestamp
-      example:
-        text: Hello, I would like to upgrade my internet plan to GOLD.
-        sender:
-          role: agent
-          externalId: 123
-        timestamp: '2021-11-23T12:13:14.555Z'
-    ServiceUnavailableResponse:
-      description: Service Unavailable response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 503-01
-            message: Service Unavailable
-    DefaultErrorDetails:
-      description: Error details
-      type: object
-      properties:
-        requestId:
-          type: string
-          description: Unique ID of the failing request
-        message:
-          type: string
-          description: Error message
-        code:
-          type: string
-          description: Error code
-      required:
-      - requestId
-      - message
-    DefaultErrorResponse:
-      description: Default error response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 500-01
-            message: Internal server error
-    BatchMessages:
-      description: A batch of messages for conversation
-      type: object
-      properties:
-        messages:
-          type: array
-          items:
-            $ref: '#/components/schemas/Message'
-          minItems: 1
-          maxItems: 300
-      example:
-        messages:
-        - text: Hello, I would like to upgrade my internet plan to GOLD.
-          sender:
-            role: customer
-            externalId: customer-xyz
-          timestamp: '2021-11-23T12:13:14.555Z'
-        - text: Let me help you with that
-          sender:
-            role: agent
-            externalId: agent-111
-          timestamp: '2021-11-23T12:13:16.666Z'
-    UnprocessableEntity:
-      description: Unprocessable Entity response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 422-01
-            message: Unprocessable Entity
-    ConflictResponse:
-      description: Conflict response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 409-01
-            message: Conflict
-    GetMessagesResponse:
-      description: Response for GetMessages
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            description: A message sent by a participant of a conversation
-            type: object
-            properties:
-              text:
-                type: string
-                minLength: 1
-                description: Text sent
-              sender:
-                description: A participant within a conversation
-                type: object
-                properties:
-                  role:
-                    $ref: '#/components/schemas/ParticipantRole'
-                  externalId:
-                    type:
-                    - string
-                    - 'null'
-                    description: The unique identifier for the relevant participant role.
-                required:
-                - role
-              messageId:
-                type: string
-                minLength: 1
-                description: The identifier of the message.
-              createdTimestamp:
-                type: string
-                format: date-time
-                description: The time when the message objectwas created in the ASAPP system.
-              clientTimestamp:
-                type: string
-                format: date-time
-                description: The timestamp of when the message was sent.
-            required:
-            - text
-            - sender
-            - messageId
-            - createdTimestamp
-            - clientTimestamp
-            example:
-              text: Hello, I would like to upgrade my internet plan to GOLD.
-              sender:
-                role: customer
-                externalId: '123456'
-              messageId: 01GMXE90AEV7H3J4DPBDKB1R79
-              createdTimestamp: '2021-11-23T12:13:16.853Z'
-              clientTimestamp: '2021-11-23T12:13:14.555Z'
     RequestEntityTooLargeResponse:
       description: Request Entity Too Large response
       type: object
@@ -874,31 +866,51 @@ components:
             requestId: 8e033668-9f1a-11ec-b909-0242ac120002
             code: 413-01
             message: Request Entity Too Large
+    Conversations:
+      description: A list of conversations
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Conversation'
   responses:
-    BadRequest:
-      description: 400 - Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BadRequestResponse'
     TooManyRequests:
       description: 429 - Too Many Requests
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/TooManyRequestsResponse'
-    DefaultError:
-      description: 500 - Internal Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DefaultErrorResponse'
     NotFound:
       description: 404 - Not Found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/NotFoundResponse'
+    DefaultError:
+      description: 500 - Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DefaultErrorResponse'
+    UnprocessableEntity:
+      description: 422 - Unprocessable Entity
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UnprocessableEntity'
+    BadRequest:
+      description: 400 - Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BadRequestResponse'
+    Unauthorized:
+      description: 401 - Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UnauthorizedResponse'
     RequestEntityTooLarge:
       description: 413 - Request Entity Too Large
       content:
@@ -911,34 +923,30 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ServiceUnavailableResponse'
-    UnprocessableEntity:
-      description: 422 - Unprocessable Entity
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UnprocessableEntity'
-    Forbidden:
-      description: 403 - Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ForbiddenResponse'
-    Unauthorized:
-      description: 401 - Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UnauthorizedResponse'
     Conflict:
       description: 409 - Conflict
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ConflictResponse'
+    Forbidden:
+      description: 403 - Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ForbiddenResponse'
   parameters:
     conversationId:
       name: conversationId
       description: The identifier for a conversation.
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: ^[A-Z0-9]+$
+    messageId:
+      name: messageId
+      description: Internal message identifier from ASAPP
       in: path
       required: true
       schema:
@@ -953,14 +961,6 @@ components:
         type: string
       example:
         externalId: id-111
-    messageId:
-      name: messageId
-      description: Internal message identifier from ASAPP
-      in: path
-      required: true
-      schema:
-        type: string
-        pattern: ^[A-Z0-9]+$
   securitySchemes:
     API-ID:
       type: apiKey
