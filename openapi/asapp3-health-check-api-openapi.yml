@@ -54,27 +54,107 @@ paths:
       operationId: getV1Health
       x-operation-id-source: derived
 components:
-  schemas:
+  responses:
+    RequestEntityTooLarge:
+      description: 413 - Request Entity Too Large
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RequestEntityTooLargeResponse'
+    Unauthorized:
+      description: 401 - Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UnauthorizedResponse'
+    ServiceUnavailable:
+      description: 503 - Service Unavailable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ServiceUnavailableResponse'
+    DefaultError:
+      description: 500 - Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DefaultErrorResponse'
+    BadRequest:
+      description: 400 - Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BadRequestResponse'
     UnprocessableEntity:
-      description: Unprocessable Entity response
+      description: 422 - Unprocessable Entity
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UnprocessableEntity'
+    Forbidden:
+      description: 403 - Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ForbiddenResponse'
+    TooManyRequests:
+      description: 429 - Too Many Requests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TooManyRequestsResponse'
+    NotFound:
+      description: 404 - Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NotFoundResponse'
+    Conflict:
+      description: 409 - Conflict
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ConflictResponse'
+  schemas:
+    UnauthorizedResponse:
+      description: Unauthorized response
       type: object
       properties:
         error:
           $ref: '#/components/schemas/DefaultErrorDetails'
           example:
             requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 422-01
-            message: Unprocessable Entity
-    ServiceUnavailableResponse:
-      description: Service Unavailable response
+            code: 401-01
+            message: Unauthorized
+    health-check:
+      description: Response for health check.
+      type: object
+      properties:
+        healthCheck:
+          type: string
+          description: Health Check status of the ASAPP services.
+      example:
+        healthCheck: SUCCESS
+    RequestEntityTooLargeResponse:
+      description: Request Entity Too Large response
       type: object
       properties:
         error:
           $ref: '#/components/schemas/DefaultErrorDetails'
           example:
             requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 503-01
-            message: Service Unavailable
+            code: 413-01
+            message: Request Entity Too Large
+    TooManyRequestsResponse:
+      description: Too Many Requests response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 429-01
+            message: Too Many Requests
     DefaultErrorResponse:
       description: Default error response
       type: object
@@ -105,55 +185,16 @@ components:
             requestId: 8e033668-9f1a-11ec-b909-0242ac120002
             code: 409-01
             message: Conflict
-    TooManyRequestsResponse:
-      description: Too Many Requests response
+    UnprocessableEntity:
+      description: Unprocessable Entity response
       type: object
       properties:
         error:
           $ref: '#/components/schemas/DefaultErrorDetails'
           example:
             requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 429-01
-            message: Too Many Requests
-    BadRequestResponse:
-      description: Bad request response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 400-01
-            message: Bad request
-    health-check:
-      description: Response for health check.
-      type: object
-      properties:
-        healthCheck:
-          type: string
-          description: Health Check status of the ASAPP services.
-      example:
-        healthCheck: SUCCESS
-    NotFoundResponse:
-      description: Not Found response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 404-01
-            message: Not Found
-    UnauthorizedResponse:
-      description: Unauthorized response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 401-01
-            message: Unauthorized
+            code: 422-01
+            message: Unprocessable Entity
     DefaultErrorDetails:
       description: Error details
       type: object
@@ -170,77 +211,36 @@ components:
       required:
       - requestId
       - message
-    RequestEntityTooLargeResponse:
-      description: Request Entity Too Large response
+    BadRequestResponse:
+      description: Bad request response
       type: object
       properties:
         error:
           $ref: '#/components/schemas/DefaultErrorDetails'
           example:
             requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 413-01
-            message: Request Entity Too Large
-  responses:
-    TooManyRequests:
-      description: 429 - Too Many Requests
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/TooManyRequestsResponse'
-    NotFound:
-      description: 404 - Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/NotFoundResponse'
-    DefaultError:
-      description: 500 - Internal Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DefaultErrorResponse'
-    UnprocessableEntity:
-      description: 422 - Unprocessable Entity
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UnprocessableEntity'
-    BadRequest:
-      description: 400 - Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BadRequestResponse'
-    Unauthorized:
-      description: 401 - Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UnauthorizedResponse'
-    RequestEntityTooLarge:
-      description: 413 - Request Entity Too Large
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RequestEntityTooLargeResponse'
-    ServiceUnavailable:
-      description: 503 - Service Unavailable
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ServiceUnavailableResponse'
-    Conflict:
-      description: 409 - Conflict
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ConflictResponse'
-    Forbidden:
-      description: 403 - Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ForbiddenResponse'
+            code: 400-01
+            message: Bad request
+    ServiceUnavailableResponse:
+      description: Service Unavailable response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 503-01
+            message: Service Unavailable
+    NotFoundResponse:
+      description: Not Found response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 404-01
+            message: Not Found
   securitySchemes:
     API-ID:
       type: apiKey

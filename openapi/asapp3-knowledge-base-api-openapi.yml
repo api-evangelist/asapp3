@@ -175,18 +175,24 @@ paths:
         API-Secret: []
 components:
   responses:
-    TooManyRequests:
-      description: 429 - Too Many Requests
+    RequestEntityTooLarge:
+      description: 413 - Request Entity Too Large
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/TooManyRequestsResponse'
-    NotFound:
-      description: 404 - Not Found
+            $ref: '#/components/schemas/RequestEntityTooLargeResponse'
+    Unauthorized:
+      description: 401 - Unauthorized
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/NotFoundResponse'
+            $ref: '#/components/schemas/UnauthorizedResponse'
+    ServiceUnavailable:
+      description: 503 - Service Unavailable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ServiceUnavailableResponse'
     DefaultError:
       description: 500 - Internal Server Error
       content:
@@ -199,221 +205,25 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/BadRequestResponse'
-    Unauthorized:
-      description: 401 - Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UnauthorizedResponse'
-    RequestEntityTooLarge:
-      description: 413 - Request Entity Too Large
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RequestEntityTooLargeResponse'
-    ServiceUnavailable:
-      description: 503 - Service Unavailable
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ServiceUnavailableResponse'
     Forbidden:
       description: 403 - Forbidden
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ForbiddenResponse'
+    TooManyRequests:
+      description: 429 - Too Many Requests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TooManyRequestsResponse'
+    NotFound:
+      description: 404 - Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NotFoundResponse'
   schemas:
-    AdditionalInstruction:
-      description: Guidelines and responses to enhance the article.
-      type: object
-      properties:
-        clarificationInstruction:
-          type: string
-          description: A guideline to improve the article's content.
-          example: Emphasize that 5G coverage may vary by location
-        exampleResponse:
-          type: string
-          description: A sample response applicable if the clarification instruction is followed.
-          example: Our 5G plans offer great speeds and data allowances, but please note that 5G coverage may vary depending on your location. You can check coverage in your area on our website.
-    Submission:
-      description: Information about a successfully submitted proposal to update an article in the Knowledge Base.
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier for the submission.
-          example: fddd060c-22d7-4aed-acae-8f8dcc093a88
-        articleId:
-          type: string
-          description: The unique identifier for the article related to the submission.
-          example: 8f8dcc09-22d7-4aed-acae-fddd060c3a88
-        submittedAt:
-          type: string
-          format: date-time
-          description: The timestamp when the submission was created.
-          example: '2024-12-12T00:00:00Z'
-        title:
-          type: string
-          description: The article title, either original or refined.
-          example: 5G Data Plan
-        content:
-          type: string
-          description: The article content, either original or refined.
-          example: Our 5G data plans offer lightning-fast speeds and generous data allowances. The Basic 5G plan includes 50GB of data per month, while our Unlimited 5G plan offers truly unlimited data with no speed caps. Both plans include unlimited calls and texts within the country. International roaming can be added for an additional fee.
-        url:
-          type: string
-          description: The reference URL of the article. Defaults to an empty string if not provided.
-          example: https://example.com/5g-data-plans
-        metadata:
-          type: array
-          items:
-            $ref: '#/components/schemas/Metadata'
-          description: Additional key-value pairs related to the article.
-          example:
-          - key: department
-            value: Customer experience
-        queryExamples:
-          type: array
-          items:
-            type: string
-          description: Examples of customer questions related to the article. Defaults to an empty array if not provided.
-          example:
-          - What 5G plans do you offer?
-          - Is there an unlimited 5G plan?
-        additionalInstructions:
-          type: array
-          items:
-            $ref: '#/components/schemas/AdditionalInstruction'
-          description: Specific instructions to ensure responses are relevant and address exceptions.
-          example:
-          - clarificationInstruction: Emphasize that 5G coverage may vary by location
-            exampleResponse: Our 5G plans offer great speeds and data allowances, but please note that 5G coverage may vary depending on your location. You can check coverage in your area on our website.
-        status:
-          $ref: '#/components/schemas/SubmissionStatus'
-          description: The current status of the submission.
-          example: PENDING_REVIEW
-    ServiceUnavailableResponse:
-      description: Service Unavailable response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 503-01
-            message: Service Unavailable
-    DefaultErrorResponse:
-      description: Default error response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 500-01
-            message: Internal server error
-    ForbiddenResponse:
-      description: Forbidden response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 403-01
-            message: Forbidden Response
-    DeploymentStatus:
-      description: The current deployment status of the article.
-      type: string
-      enum:
-      - NONE
-      - DRAFT
-      - SANDBOX
-      - PRODUCTION
-      - SANDBOX_AND_PRODUCTION
-      example: DRAFT
-    TooManyRequestsResponse:
-      description: Too Many Requests response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 429-01
-            message: Too Many Requests
-    BadRequestResponse:
-      description: Bad request response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 400-01
-            message: Bad request
-    SubmissionRequest:
-      description: A proposal for creating a new article or updating an existing one in the Knowledge Base.
-      type: object
-      properties:
-        articleId:
-          type: string
-          description: The unique identifier for the article being updated.
-          example: 8f8dcc09-22d7-4aed-acae-fddd060c3a88
-        title:
-          type: string
-          description: The proposed title of the article, which will be refined automatically. This is required for new articles.
-          minLength: 1
-          maxLength: 256
-          example: 5G Data Plan
-        content:
-          type: string
-          description: The article content in plain text, expected to be in English and limited to 200,000 Unicode characters. This will be refined during submission. Required for new articles.
-          minLength: 1
-          maxLength: 200000
-          example: Our 5G data plans offer lightning-fast speeds and generous data allowances. The Basic 5G plan includes 50GB of data per month, while our Unlimited 5G plan offers truly unlimited data with no speed caps. Both plans include unlimited calls and texts within the country. International roaming can be added for an additional fee.
-        url:
-          type: string
-          description: A reference URL for the article, used for informational purposes only.
-          example: https://example.com/5g-data-plans
-        metadata:
-          type: array
-          items:
-            $ref: '#/components/schemas/Metadata'
-          description: Additional key-value pairs related to the article.
-          example:
-          - key: department
-            value: Customer experience
-        queryExamples:
-          type: array
-          items:
-            type: string
-          description: Examples of customer questions related to the article, such as "Why is my bill so high?". Defaults to an empty list if not provided.
-          example:
-          - What 5G plans do you offer?
-          - Is there an unlimited 5G plan?
-        additionalInstructions:
-          type: array
-          items:
-            $ref: '#/components/schemas/AdditionalInstruction'
-          description: Specific instructions to ensure responses are relevant and address exceptions.
-          example:
-          - clarificationInstruction: Emphasize that 5G coverage may vary by location
-            exampleResponse: Our 5G plans offer great speeds and data allowances, but please note that 5G coverage may vary depending on your location. You can check coverage in your area on our website.
-      example:
-        title: 5G Data Plan
-        content: Our 5G data plans offer lightning-fast speeds and generous data allowances. The Basic 5G plan includes 50GB of data per month, while our Unlimited 5G plan offers truly unlimited data with no speed caps. Both plans include unlimited calls and texts within the country. International roaming can be added for an additional fee.
-        url: https://example.com/5g-data-plans
-        metadata:
-        - key: department
-          value: Customer experience
-        queryExamples:
-        - What 5G plans do you offer?
-        - Is there an unlimited 5G plan?
-        additionalInstructions:
-        - clarificationInstruction: Emphasize that 5G coverage may vary by location
-          exampleResponse: Our 5G plans offer great speeds and data allowances, but please note that 5G coverage may vary depending on your location. You can check coverage in your area on our website.
     Article:
       description: An article stored within the Knowledge Base.
       type: object
@@ -508,24 +318,6 @@ components:
         pendingSubmissionId: 86ba487a-6d58-4b4c-82de-9d422f1166ae
         currentVersion: v1
         deploymentStatus: DRAFT
-    SubmissionStatus:
-      description: The current status of the submission.
-      type: string
-      enum:
-      - PENDING_REVIEW
-      - ACCEPTED
-      - REJECTED
-      example: PENDING_REVIEW
-    NotFoundResponse:
-      description: Not Found response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 404-01
-            message: Not Found
     UnauthorizedResponse:
       description: Unauthorized response
       type: object
@@ -536,22 +328,18 @@ components:
             requestId: 8e033668-9f1a-11ec-b909-0242ac120002
             code: 401-01
             message: Unauthorized
-    DefaultErrorDetails:
-      description: Error details
+    AdditionalInstruction:
+      description: Guidelines and responses to enhance the article.
       type: object
       properties:
-        requestId:
+        clarificationInstruction:
           type: string
-          description: Unique ID of the failing request
-        message:
+          description: A guideline to improve the article's content.
+          example: Emphasize that 5G coverage may vary by location
+        exampleResponse:
           type: string
-          description: Error message
-        code:
-          type: string
-          description: Error code
-      required:
-      - requestId
-      - message
+          description: A sample response applicable if the clarification instruction is followed.
+          example: Our 5G plans offer great speeds and data allowances, but please note that 5G coverage may vary depending on your location. You can check coverage in your area on our website.
     RequestEntityTooLargeResponse:
       description: Request Entity Too Large response
       type: object
@@ -562,6 +350,16 @@ components:
             requestId: 8e033668-9f1a-11ec-b909-0242ac120002
             code: 413-01
             message: Request Entity Too Large
+    DeploymentStatus:
+      description: The current deployment status of the article.
+      type: string
+      enum:
+      - NONE
+      - DRAFT
+      - SANDBOX
+      - PRODUCTION
+      - SANDBOX_AND_PRODUCTION
+      example: DRAFT
     Metadata:
       description: A key-value pair providing additional information about the article.
       type: object
@@ -579,6 +377,208 @@ components:
           minLength: 1
           description: The value for the metadata entry.
           example: Customer experience
+    TooManyRequestsResponse:
+      description: Too Many Requests response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 429-01
+            message: Too Many Requests
+    SubmissionRequest:
+      description: A proposal for creating a new article or updating an existing one in the Knowledge Base.
+      type: object
+      properties:
+        articleId:
+          type: string
+          description: The unique identifier for the article being updated.
+          example: 8f8dcc09-22d7-4aed-acae-fddd060c3a88
+        title:
+          type: string
+          description: The proposed title of the article, which will be refined automatically. This is required for new articles.
+          minLength: 1
+          maxLength: 256
+          example: 5G Data Plan
+        content:
+          type: string
+          description: The article content in plain text, expected to be in English and limited to 200,000 Unicode characters. This will be refined during submission. Required for new articles.
+          minLength: 1
+          maxLength: 200000
+          example: Our 5G data plans offer lightning-fast speeds and generous data allowances. The Basic 5G plan includes 50GB of data per month, while our Unlimited 5G plan offers truly unlimited data with no speed caps. Both plans include unlimited calls and texts within the country. International roaming can be added for an additional fee.
+        url:
+          type: string
+          description: A reference URL for the article, used for informational purposes only.
+          example: https://example.com/5g-data-plans
+        metadata:
+          type: array
+          items:
+            $ref: '#/components/schemas/Metadata'
+          description: Additional key-value pairs related to the article.
+          example:
+          - key: department
+            value: Customer experience
+        queryExamples:
+          type: array
+          items:
+            type: string
+          description: Examples of customer questions related to the article, such as "Why is my bill so high?". Defaults to an empty list if not provided.
+          example:
+          - What 5G plans do you offer?
+          - Is there an unlimited 5G plan?
+        additionalInstructions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdditionalInstruction'
+          description: Specific instructions to ensure responses are relevant and address exceptions.
+          example:
+          - clarificationInstruction: Emphasize that 5G coverage may vary by location
+            exampleResponse: Our 5G plans offer great speeds and data allowances, but please note that 5G coverage may vary depending on your location. You can check coverage in your area on our website.
+      example:
+        title: 5G Data Plan
+        content: Our 5G data plans offer lightning-fast speeds and generous data allowances. The Basic 5G plan includes 50GB of data per month, while our Unlimited 5G plan offers truly unlimited data with no speed caps. Both plans include unlimited calls and texts within the country. International roaming can be added for an additional fee.
+        url: https://example.com/5g-data-plans
+        metadata:
+        - key: department
+          value: Customer experience
+        queryExamples:
+        - What 5G plans do you offer?
+        - Is there an unlimited 5G plan?
+        additionalInstructions:
+        - clarificationInstruction: Emphasize that 5G coverage may vary by location
+          exampleResponse: Our 5G plans offer great speeds and data allowances, but please note that 5G coverage may vary depending on your location. You can check coverage in your area on our website.
+    DefaultErrorResponse:
+      description: Default error response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 500-01
+            message: Internal server error
+    ForbiddenResponse:
+      description: Forbidden response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 403-01
+            message: Forbidden Response
+    Submission:
+      description: Information about a successfully submitted proposal to update an article in the Knowledge Base.
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the submission.
+          example: fddd060c-22d7-4aed-acae-8f8dcc093a88
+        articleId:
+          type: string
+          description: The unique identifier for the article related to the submission.
+          example: 8f8dcc09-22d7-4aed-acae-fddd060c3a88
+        submittedAt:
+          type: string
+          format: date-time
+          description: The timestamp when the submission was created.
+          example: '2024-12-12T00:00:00Z'
+        title:
+          type: string
+          description: The article title, either original or refined.
+          example: 5G Data Plan
+        content:
+          type: string
+          description: The article content, either original or refined.
+          example: Our 5G data plans offer lightning-fast speeds and generous data allowances. The Basic 5G plan includes 50GB of data per month, while our Unlimited 5G plan offers truly unlimited data with no speed caps. Both plans include unlimited calls and texts within the country. International roaming can be added for an additional fee.
+        url:
+          type: string
+          description: The reference URL of the article. Defaults to an empty string if not provided.
+          example: https://example.com/5g-data-plans
+        metadata:
+          type: array
+          items:
+            $ref: '#/components/schemas/Metadata'
+          description: Additional key-value pairs related to the article.
+          example:
+          - key: department
+            value: Customer experience
+        queryExamples:
+          type: array
+          items:
+            type: string
+          description: Examples of customer questions related to the article. Defaults to an empty array if not provided.
+          example:
+          - What 5G plans do you offer?
+          - Is there an unlimited 5G plan?
+        additionalInstructions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdditionalInstruction'
+          description: Specific instructions to ensure responses are relevant and address exceptions.
+          example:
+          - clarificationInstruction: Emphasize that 5G coverage may vary by location
+            exampleResponse: Our 5G plans offer great speeds and data allowances, but please note that 5G coverage may vary depending on your location. You can check coverage in your area on our website.
+        status:
+          $ref: '#/components/schemas/SubmissionStatus'
+          description: The current status of the submission.
+          example: PENDING_REVIEW
+    DefaultErrorDetails:
+      description: Error details
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: Unique ID of the failing request
+        message:
+          type: string
+          description: Error message
+        code:
+          type: string
+          description: Error code
+      required:
+      - requestId
+      - message
+    BadRequestResponse:
+      description: Bad request response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 400-01
+            message: Bad request
+    SubmissionStatus:
+      description: The current status of the submission.
+      type: string
+      enum:
+      - PENDING_REVIEW
+      - ACCEPTED
+      - REJECTED
+      example: PENDING_REVIEW
+    ServiceUnavailableResponse:
+      description: Service Unavailable response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 503-01
+            message: Service Unavailable
+    NotFoundResponse:
+      description: Not Found response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 404-01
+            message: Not Found
   securitySchemes:
     API-ID:
       type: apiKey
