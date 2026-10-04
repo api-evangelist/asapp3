@@ -1,0 +1,21 @@
+{
+  "repo": "asapp3",
+  "feeds": [
+    {
+      "source": "https://docs.asapp.com/releases/overview",
+      "feed_url": "https://docs.asapp.com/releases/overview/rss.xml",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
+    },
+    {
+      "source": "https://docs.asapp.com/releases/overview/rss.xml",
+      "feed_url": "https://docs.asapp.com/releases/overview/rss.xml",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    }
+  ],
+  "post_count": 14,
+  "fetched": "2026-10-03T12:30:02Z"
+}

@@ -13,7 +13,18 @@ x-tier-reason: enrichment pass 2026-09-26 (modular-v1; was harvest)
 specificationVersion: '0.20'
 created: '2026-09-26'
 modified: '2026-09-26'
+x-docs-platform: mintlify
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-10-03
+x-docs-hosting: vercel
 tags:
+- Artificial Intelligence
+- Customer Experience
+- Enterprise
+- Contact Center
+- Platform
+- Company
+tags_raw:
 - AI
 - CustomerExperience
 - Enterprise
@@ -26,6 +37,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/asapp3-capability-edges.yml
+  name: Asapp3 Business Capability Map
 - type: AgenticAccess
   url: agentic-access/asapp3-agentic-access.yml
 - type: RateLimits
