@@ -295,103 +295,7 @@ paths:
       - API-ID: []
         API-Secret: []
 components:
-  responses:
-    RequestEntityTooLarge:
-      description: 413 - Request Entity Too Large
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RequestEntityTooLargeResponse'
-    Unauthorized:
-      description: 401 - Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UnauthorizedResponse'
-    ServiceUnavailable:
-      description: 503 - Service Unavailable
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ServiceUnavailableResponse'
-    DefaultError:
-      description: 500 - Internal Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DefaultErrorResponse'
-    BadRequest:
-      description: 400 - Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BadRequestResponse'
-    UnprocessableEntity:
-      description: 422 - Unprocessable Entity
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UnprocessableEntity'
-    Forbidden:
-      description: 403 - Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ForbiddenResponse'
-    TooManyRequests:
-      description: 429 - Too Many Requests
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/TooManyRequestsResponse'
-    Conflict:
-      description: 409 - Conflict
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ConflictResponse'
-    NotFound:
-      description: 404 - Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/NotFoundResponse'
   schemas:
-    UnauthorizedResponse:
-      description: Unauthorized response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 401-01
-            message: Unauthorized
-    ListFeedVersionsResponse:
-      description: Get versions for a company feed
-      type: object
-      properties:
-        feed:
-          type: string
-          example: feed_test
-        versions:
-          type: array
-          items:
-            type: string
-          example:
-          - '1'
-          - '2'
-          - '3'
-    RequestEntityTooLargeResponse:
-      description: Request Entity Too Large response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 413-01
-            message: Request Entity Too Large
     GetFeedFileRequest:
       description: Get file for a company feed/version/format/interval/file
       type: object
@@ -443,16 +347,6 @@ components:
       example:
         feed: feed_test
         version: '1'
-    TooManyRequestsResponse:
-      description: Too Many Requests response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 429-01
-            message: Too Many Requests
     ListFeedDatesRequest:
       description: Get dates for a company feed/version/format
       type: object
@@ -474,6 +368,18 @@ components:
         feed: feed_test
         version: '1'
         format: jsonl
+    ListFeedsResponse:
+      description: Get feed names for a company
+      type: object
+      properties:
+        feeds:
+          type: array
+          items:
+            type: string
+          example:
+          - feed_1
+          - feed_2
+          - feed_3
     ListFeedIntervalsResponse:
       description: Get Dates for a company feed/version/format
       type: object
@@ -497,6 +403,47 @@ components:
           example:
           - hr=01/mi=01
           - hr=01/mi=02
+    RequestEntityTooLargeResponse:
+      description: Request Entity Too Large response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 413-01
+            message: Request Entity Too Large
+    UnprocessableEntity:
+      description: Unprocessable Entity response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 422-01
+            message: Unprocessable Entity
+    ListFeedDatesResponse:
+      description: Get Dates for a company feed/version/format
+      type: object
+      properties:
+        feed:
+          type: string
+          example: feed_test
+        version:
+          type: string
+          example: '1'
+        format:
+          type: string
+          example: format=jsonl
+        dates:
+          type: array
+          items:
+            type: string
+          example:
+          - '2022-06-27'
+          - '2022-05-20'
+          - '2022-05-21'
     ListFeedFilesRequest:
       description: Get files for a company feed/version/format/date/interval
       type: object
@@ -527,6 +474,48 @@ components:
         format: jsonl
         date: '2022-06-27'
         interval: hr=23
+    ListFeedVersionsResponse:
+      description: Get versions for a company feed
+      type: object
+      properties:
+        feed:
+          type: string
+          example: feed_test
+        versions:
+          type: array
+          items:
+            type: string
+          example:
+          - '1'
+          - '2'
+          - '3'
+    ListFeedFormatsResponse:
+      description: Get formats for a company feed
+      type: object
+      properties:
+        feed:
+          type: string
+          example: feed_test
+        version:
+          type: string
+          example: '1'
+        formats:
+          type: array
+          items:
+            type: string
+          example:
+          - jsonl
+          - csv
+    UnauthorizedResponse:
+      description: Unauthorized response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 401-01
+            message: Unauthorized
     DefaultErrorResponse:
       description: Default error response
       type: object
@@ -537,62 +526,37 @@ components:
             requestId: 8e033668-9f1a-11ec-b909-0242ac120002
             code: 500-01
             message: Internal server error
-    ForbiddenResponse:
-      description: Forbidden response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 403-01
-            message: Forbidden Response
-    ConflictResponse:
-      description: Conflict response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 409-01
-            message: Conflict
-    ListFeedIntervalsRequest:
-      description: Get intervals for a company feed/version/format/date
+    ListFeedVersionsRequest:
+      description: Get versions for a company feed
       type: object
       properties:
         feed:
           type: string
           example: feed_test
-        version:
-          type: string
-          example: '1'
-        format:
-          type: string
-          example: jsonl
-        date:
-          type: string
-          example: '2022-06-27'
       required:
       - feed
-      - version
-      - format
-      - date
       example:
         feed: feed_test
-        version: '1'
-        format: jsonl
-        date: '2022-06-27'
-    UnprocessableEntity:
-      description: Unprocessable Entity response
+    BadRequestResponse:
+      description: Bad request response
       type: object
       properties:
         error:
           $ref: '#/components/schemas/DefaultErrorDetails'
           example:
             requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 422-01
-            message: Unprocessable Entity
+            code: 400-01
+            message: Bad request
+    TooManyRequestsResponse:
+      description: Too Many Requests response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 429-01
+            message: Too Many Requests
     ListFeedFilesResponse:
       description: Get files for a company feed/version/format/date/interval
       type: object
@@ -635,66 +599,6 @@ components:
       required:
       - requestId
       - message
-    BadRequestResponse:
-      description: Bad request response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 400-01
-            message: Bad request
-    ListFeedsResponse:
-      description: Get feed names for a company
-      type: object
-      properties:
-        feeds:
-          type: array
-          items:
-            type: string
-          example:
-          - feed_1
-          - feed_2
-          - feed_3
-    ListFeedDatesResponse:
-      description: Get Dates for a company feed/version/format
-      type: object
-      properties:
-        feed:
-          type: string
-          example: feed_test
-        version:
-          type: string
-          example: '1'
-        format:
-          type: string
-          example: format=jsonl
-        dates:
-          type: array
-          items:
-            type: string
-          example:
-          - '2022-06-27'
-          - '2022-05-20'
-          - '2022-05-21'
-    ListFeedFormatsResponse:
-      description: Get formats for a company feed
-      type: object
-      properties:
-        feed:
-          type: string
-          example: feed_test
-        version:
-          type: string
-          example: '1'
-        formats:
-          type: array
-          items:
-            type: string
-          example:
-          - jsonl
-          - csv
     GetFeedFileResponse:
       description: Get a presigned url for a file
       type: object
@@ -720,16 +624,52 @@ components:
         url:
           type: string
           example: www.example.com/12381273972817312/file1.json1
-    ServiceUnavailableResponse:
-      description: Service Unavailable response
+    ListFeedIntervalsRequest:
+      description: Get intervals for a company feed/version/format/date
+      type: object
+      properties:
+        feed:
+          type: string
+          example: feed_test
+        version:
+          type: string
+          example: '1'
+        format:
+          type: string
+          example: jsonl
+        date:
+          type: string
+          example: '2022-06-27'
+      required:
+      - feed
+      - version
+      - format
+      - date
+      example:
+        feed: feed_test
+        version: '1'
+        format: jsonl
+        date: '2022-06-27'
+    ConflictResponse:
+      description: Conflict response
       type: object
       properties:
         error:
           $ref: '#/components/schemas/DefaultErrorDetails'
           example:
             requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 503-01
-            message: Service Unavailable
+            code: 409-01
+            message: Conflict
+    ForbiddenResponse:
+      description: Forbidden response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 403-01
+            message: Forbidden Response
     NotFoundResponse:
       description: Not Found response
       type: object
@@ -740,17 +680,77 @@ components:
             requestId: 8e033668-9f1a-11ec-b909-0242ac120002
             code: 404-01
             message: Not Found
-    ListFeedVersionsRequest:
-      description: Get versions for a company feed
+    ServiceUnavailableResponse:
+      description: Service Unavailable response
       type: object
       properties:
-        feed:
-          type: string
-          example: feed_test
-      required:
-      - feed
-      example:
-        feed: feed_test
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 503-01
+            message: Service Unavailable
+  responses:
+    Unauthorized:
+      description: 401 - Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UnauthorizedResponse'
+    BadRequest:
+      description: 400 - Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BadRequestResponse'
+    Forbidden:
+      description: 403 - Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ForbiddenResponse'
+    ServiceUnavailable:
+      description: 503 - Service Unavailable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ServiceUnavailableResponse'
+    NotFound:
+      description: 404 - Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NotFoundResponse'
+    DefaultError:
+      description: 500 - Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DefaultErrorResponse'
+    TooManyRequests:
+      description: 429 - Too Many Requests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TooManyRequestsResponse'
+    Conflict:
+      description: 409 - Conflict
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ConflictResponse'
+    UnprocessableEntity:
+      description: 422 - Unprocessable Entity
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UnprocessableEntity'
+    RequestEntityTooLarge:
+      description: 413 - Request Entity Too Large
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RequestEntityTooLargeResponse'
   securitySchemes:
     API-ID:
       type: apiKey

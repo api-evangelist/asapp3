@@ -920,101 +920,88 @@ paths:
       - API-ID: []
         API-Secret: []
 components:
-  parameters:
-    folderId:
-      name: folderId
-      description: Identifier of the folder, data format is expected to be UUID
-      in: path
-      required: true
-      schema:
-        type: string
-    agentId:
-      name: agentId
-      description: Identifier of the agent, data format is expected to be UUID
-      in: query
-      required: true
-      schema:
-        type: string
-    responseId:
-      name: responseId
-      description: Identifier of the response, data format is expected to be UUID
-      in: path
-      required: true
-      schema:
-        type: string
-    conversationId:
-      name: conversationId
-      description: The identifier for a conversation.
-      in: path
-      required: true
-      schema:
-        type: string
-        pattern: ^[A-Z0-9]+$
+  responses:
+    Unauthorized:
+      description: 401 - Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UnauthorizedResponse'
+    BadRequest:
+      description: 400 - Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BadRequestResponse'
+    Forbidden:
+      description: 403 - Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ForbiddenResponse'
+    ServiceUnavailable:
+      description: 503 - Service Unavailable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ServiceUnavailableResponse'
+    NotFound:
+      description: 404 - Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NotFoundResponse'
+    DefaultError:
+      description: 500 - Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DefaultErrorResponse'
+    TooManyRequests:
+      description: 429 - Too Many Requests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TooManyRequestsResponse'
+    Conflict:
+      description: 409 - Conflict
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ConflictResponse'
+    UnprocessableEntity:
+      description: 422 - Unprocessable Entity
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UnprocessableEntity'
+    RequestEntityTooLarge:
+      description: 413 - Request Entity Too Large
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RequestEntityTooLargeResponse'
   schemas:
-    Responses:
+    Folder:
       type: object
-      description: A set of responses and folders for an agent
+      description: A folder of responses
       properties:
-        responsesList:
-          type: array
-          description: the list of responses with their associated metadata
-          items:
-            $ref: '#/components/schemas/Response'
-        folderList:
-          type: array
-          description: the list of folders
-          items:
-            $ref: '#/components/schemas/Folder'
-        pageToken:
+        id:
           type: string
-          description: the token to the next page if there is one, otherwise empty
-    UnauthorizedResponse:
-      description: Unauthorized response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 401-01
-            message: Unauthorized
-    Participant:
-      description: Represents a participant in the conversation.
-      type: object
-      properties:
-        role:
-          $ref: '#/components/schemas/ParticipantRole'
-          description: The role of the participant in the conversation.
-        externalId:
+          description: The ID of the folder
+          readOnly: true
+        parentFolderId:
           type: string
-          description: The unique identifier for the participant in your external system. This should be consistent across all interactions for the same individual.
+          description: The ID of the parent folder.
+        name:
+          type: string
+          description: the name of the folder
       required:
-      - role
-      - externalId
-    PhraseCompletion:
-      description: Completion of the phrase the agent is currently typing, to be displayed inline in the composer
-      type: object
-      properties:
-        text:
-          type: string
-          description: Phrase completion text for the agent (this may be empty if the model does not have a confident prediction for how to complete the message)
-          example: Hello, how can I help you?
-    AutopilotGreeting:
-      type: object
-      description: Autopilot greetings for an agent
-      properties:
-        greetingGeneric:
-          type: string
-          description: Generic greeting, without any template data
-        greetingCustomerName:
-          type: string
-          description: Greeting with template for customer name
-      required:
-      - greetingGeneric
-      - greetingCustomerName
+      - name
       example:
-        greetingGeneric: Welcome!
-        greetingCustomerName: Welcome {NAME}!
+        id: '123'
+        parentFolderId: '456'
+        name: folder name
     MessageAnalyticEvent:
       description: 'Analytics event reporting actions the agent performed while composing a message.
 
@@ -1152,6 +1139,23 @@ components:
               example: How can I help you today?
           required:
           - text
+    Responses:
+      type: object
+      description: A set of responses and folders for an agent
+      properties:
+        responsesList:
+          type: array
+          description: the list of responses with their associated metadata
+          items:
+            $ref: '#/components/schemas/Response'
+        folderList:
+          type: array
+          description: the list of folders
+          items:
+            $ref: '#/components/schemas/Folder'
+        pageToken:
+          type: string
+          description: the token to the next page if there is one, otherwise empty
     Response:
       type: object
       properties:
@@ -1182,139 +1186,6 @@ components:
                   type: string
                 description: the list of allowed values for this metadata item
           description: free-form metadata, in the form of a map of keys to lists of allowed values for each key, that can be added to any response. At least one of the values in the list for each key included  here must match what gets sent when requesting suggestions, so that responses can be filtered appropriately.
-    RequestEntityTooLargeResponse:
-      description: Request Entity Too Large response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 413-01
-            message: Request Entity Too Large
-    AutopilotStatus:
-      type: object
-      description: Autopilot status for an agent
-      properties:
-        enabled:
-          type: boolean
-          description: If true, autopilot is enabled
-      required:
-      - enabled
-      example:
-        enabled: true
-    TooManyRequestsResponse:
-      description: Too Many Requests response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 429-01
-            message: Too Many Requests
-    Settings:
-      type: object
-      properties:
-        suggestionsWhileTypingDisabled:
-          type: boolean
-          description: if true, suggestions endpoint should not be called while agent is typing
-        phraseCompletionsDisabled:
-          type: boolean
-          description: if true, phraseCompletion from suggestions endpoint should not be shown to the agent
-        spellcheckDisabled:
-          type: boolean
-          description: if true, spelling corrections endpoint should not be called while agent is typing
-        autopilotGreetingsDisabled:
-          type: boolean
-          description: if true, autopilot greetings should not be available for configuration
-        autocomposeDisabled:
-          type: boolean
-          description: 'if true, all AutoCompose features should be disabled (regardless of the other settings); this
-
-            is intended for use in A/B tests in which a control group of agents is not exposed to AutoCompose
-
-            '
-    NewCustomResponse:
-      type: object
-      properties:
-        text:
-          type: string
-          description: The text of the response
-        title:
-          type: string
-          description: The title of the response
-        folderId:
-          type: string
-          description: the ID of the folder the response belongs to (used for custom responses).
-        metadata:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                description: the name of this metadata item
-              allowedValues:
-                type: array
-                items:
-                  type: string
-                description: the list of allowed values for this metadata item
-          description: free-form metadata, in the form of a map of keys to lists of allowed values for each key, that can be added to any response. At least one of the values in the list for each key included  here must match what gets sent when requesting suggestions, so that responses can be filtered appropriately.
-      required:
-      - text
-      - title
-      example:
-        text: fold text
-        title: folder title
-        folderId: '123'
-    DefaultErrorResponse:
-      description: Default error response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 500-01
-            message: Internal server error
-    ForbiddenResponse:
-      description: Forbidden response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 403-01
-            message: Forbidden Response
-    ConflictResponse:
-      description: Conflict response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 409-01
-            message: Conflict
-    Suggestions:
-      description: Suggestions for next agent message
-      type: object
-      properties:
-        id:
-          description: ID for the suggestions that were returned (to be used in analytics events)
-          type: string
-        message:
-          $ref: '#/components/schemas/MessagesResponse'
-        suggestions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Suggestion'
-        phraseCompletion:
-          $ref: '#/components/schemas/PhraseCompletion'
-        autopilotMessage:
-          $ref: '#/components/schemas/AutopilotMessage'
     SpellcheckCorrection:
       type: object
       properties:
@@ -1334,31 +1205,24 @@ components:
           type: integer
           description: position where the misspelling starts
           example: 7
-    Message:
-      description: Represents a single message within a conversation.
+    RequestEntityTooLargeResponse:
+      description: Request Entity Too Large response
       type: object
       properties:
-        text:
-          type: string
-          minLength: 1
-          description: The content of the message.
-        sender:
-          $ref: '#/components/schemas/Participant'
-          description: Information about the participant who sent the message.
-        timestamp:
-          type: string
-          format: date-time
-          description: The time when the message was sent. Include the timezone, otherwise UTC will be assumed.
-      required:
-      - text
-      - sender
-      - timestamp
-      example:
-        text: Hello, I would like to upgrade my internet plan to GOLD.
-        sender:
-          role: agent
-          externalId: 123
-        timestamp: '2021-11-23T12:13:14.555Z'
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 413-01
+            message: Request Entity Too Large
+    ProfanityResult:
+      description: ProfanityResult
+      type: object
+      properties:
+        hasProfanity:
+          description: A boolean value describing if the text contains a curse word.
+          type: boolean
+          example: false
     UnprocessableEntity:
       description: Unprocessable Entity response
       type: object
@@ -1369,48 +1233,6 @@ components:
             requestId: 8e033668-9f1a-11ec-b909-0242ac120002
             code: 422-01
             message: Unprocessable Entity
-    SuggestionsRequest:
-      description: A suggestions request with an optional message to add to the conversation
-      type: object
-      properties:
-        query:
-          description: text the agent has already entered into the composer
-          type: string
-        message:
-          $ref: '#/components/schemas/Message'
-      example:
-        query: Hello, how can
-        message:
-          text: Hello, I would like to upgrade my internet plan to GOLD.
-          sender:
-            role: customer
-            externalId: customer-x
-          timestamp: '2023-06-01T19:16:55.706Z'
-    MessagesResponse:
-      description: Response for messages
-      type: object
-      properties:
-        id:
-          type: string
-          description: Message ID to be used for analytics
-      example:
-        id: 01BX5ZZKBKACTAV9WEVGEMMVS1
-    Suggestion:
-      description: Suggestion
-      type: object
-      properties:
-        text:
-          type: string
-          description: Suggestion text for the agent
-          example: Hello John, how can I help you?
-        templateText:
-          type: string
-          description: Suggestion text with placeholders for metadata instead of the values filled in
-          example: Hello {NAME}, how can I help you?
-        title:
-          type: string
-          description: The title of the response
-          example: Greeting
     AutopilotMessage:
       description: Recommended message for the agent to autopilot send.
       type: object
@@ -1435,42 +1257,53 @@ components:
           type: integer
           description: Delay before showing the preview and starting the countdown to send the message
           example: 0
-    DefaultErrorDetails:
-      description: Error details
+    GlobalResponsesVersion:
       type: object
-      properties:
-        requestId:
-          type: string
-          description: Unique ID of the failing request
-        message:
-          type: string
-          description: Error message
-        code:
-          type: string
-          description: Error code
-      required:
-      - requestId
-      - message
-    Folder:
-      type: object
-      description: A folder of responses
       properties:
         id:
           type: string
-          description: The ID of the folder
+          description: The ID of this version of the global responses
           readOnly: true
-        parentFolderId:
+        description:
           type: string
-          description: The ID of the parent folder.
-        name:
+          description: A human-readable description of the version
+    MessagesResponse:
+      description: Response for messages
+      type: object
+      properties:
+        id:
           type: string
-          description: the name of the folder
-      required:
-      - name
+          description: Message ID to be used for analytics
       example:
-        id: '123'
-        parentFolderId: '456'
-        name: folder name
+        id: 01BX5ZZKBKACTAV9WEVGEMMVS1
+    UnauthorizedResponse:
+      description: Unauthorized response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 401-01
+            message: Unauthorized
+    DefaultErrorResponse:
+      description: Default error response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 500-01
+            message: Internal server error
+    PhraseCompletion:
+      description: Completion of the phrase the agent is currently typing, to be displayed inline in the composer
+      type: object
+      properties:
+        text:
+          type: string
+          description: Phrase completion text for the agent (this may be empty if the model does not have a confident prediction for how to complete the message)
+          example: Hello, how can I help you?
     BadRequestResponse:
       description: Bad request response
       type: object
@@ -1633,6 +1466,32 @@ components:
             '
           type: integer
           example: 1
+    AutopilotGreeting:
+      type: object
+      description: Autopilot greetings for an agent
+      properties:
+        greetingGeneric:
+          type: string
+          description: Generic greeting, without any template data
+        greetingCustomerName:
+          type: string
+          description: Greeting with template for customer name
+      required:
+      - greetingGeneric
+      - greetingCustomerName
+      example:
+        greetingGeneric: Welcome!
+        greetingCustomerName: Welcome {NAME}!
+    TooManyRequestsResponse:
+      description: Too Many Requests response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 429-01
+            message: Too Many Requests
     GlobalResponsesWithVersion:
       type: object
       properties:
@@ -1640,55 +1499,57 @@ components:
           $ref: '#/components/schemas/Responses'
         version:
           $ref: '#/components/schemas/GlobalResponsesVersion'
-    ProfanityResult:
-      description: ProfanityResult
+    Suggestion:
+      description: Suggestion
       type: object
       properties:
-        hasProfanity:
-          description: A boolean value describing if the text contains a curse word.
+        text:
+          type: string
+          description: Suggestion text for the agent
+          example: Hello John, how can I help you?
+        templateText:
+          type: string
+          description: Suggestion text with placeholders for metadata instead of the values filled in
+          example: Hello {NAME}, how can I help you?
+        title:
+          type: string
+          description: The title of the response
+          example: Greeting
+    Participant:
+      description: Represents a participant in the conversation.
+      type: object
+      properties:
+        role:
+          $ref: '#/components/schemas/ParticipantRole'
+          description: The role of the participant in the conversation.
+        externalId:
+          type: string
+          description: The unique identifier for the participant in your external system. This should be consistent across all interactions for the same individual.
+      required:
+      - role
+      - externalId
+    Settings:
+      type: object
+      properties:
+        suggestionsWhileTypingDisabled:
           type: boolean
-          example: false
-    ParticipantRole:
-      description: 'A participant role, usually the customer or an agent for human participants. System participant is also allowed but keep in mind
+          description: if true, suggestions endpoint should not be called while agent is typing
+        phraseCompletionsDisabled:
+          type: boolean
+          description: if true, phraseCompletion from suggestions endpoint should not be shown to the agent
+        spellcheckDisabled:
+          type: boolean
+          description: if true, spelling corrections endpoint should not be called while agent is typing
+        autopilotGreetingsDisabled:
+          type: boolean
+          description: if true, autopilot greetings should not be available for configuration
+        autocomposeDisabled:
+          type: boolean
+          description: 'if true, all AutoCompose features should be disabled (regardless of the other settings); this
 
-        that this role won''t be considered a participant in a conversation, just a message sender.
+            is intended for use in A/B tests in which a control group of agents is not exposed to AutoCompose
 
-        '
-      type: string
-      enum:
-      - agent
-      - customer
-      - system
-    ServiceUnavailableResponse:
-      description: Service Unavailable response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 503-01
-            message: Service Unavailable
-    NotFoundResponse:
-      description: Not Found response
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/DefaultErrorDetails'
-          example:
-            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
-            code: 404-01
-            message: Not Found
-    GlobalResponsesVersion:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The ID of this version of the global responses
-          readOnly: true
-        description:
-          type: string
-          description: A human-readable description of the version
+            '
     SpellcheckQuery:
       type: object
       properties:
@@ -1722,67 +1583,206 @@ components:
           cursorEnd: 12
         userDictionary:
         - Hellooo
-  responses:
-    RequestEntityTooLarge:
-      description: 413 - Request Entity Too Large
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RequestEntityTooLargeResponse'
-    Unauthorized:
-      description: 401 - Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UnauthorizedResponse'
-    ServiceUnavailable:
-      description: 503 - Service Unavailable
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ServiceUnavailableResponse'
-    DefaultError:
-      description: 500 - Internal Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DefaultErrorResponse'
-    BadRequest:
-      description: 400 - Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BadRequestResponse'
-    UnprocessableEntity:
-      description: 422 - Unprocessable Entity
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UnprocessableEntity'
-    Forbidden:
-      description: 403 - Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ForbiddenResponse'
-    TooManyRequests:
-      description: 429 - Too Many Requests
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/TooManyRequestsResponse'
-    NotFound:
-      description: 404 - Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/NotFoundResponse'
-    Conflict:
-      description: 409 - Conflict
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ConflictResponse'
+    DefaultErrorDetails:
+      description: Error details
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: Unique ID of the failing request
+        message:
+          type: string
+          description: Error message
+        code:
+          type: string
+          description: Error code
+      required:
+      - requestId
+      - message
+    ParticipantRole:
+      description: 'A participant role, usually the customer or an agent for human participants. System participant is also allowed but keep in mind
+
+        that this role won''t be considered a participant in a conversation, just a message sender.
+
+        '
+      type: string
+      enum:
+      - agent
+      - customer
+      - system
+    ConflictResponse:
+      description: Conflict response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 409-01
+            message: Conflict
+    SuggestionsRequest:
+      description: A suggestions request with an optional message to add to the conversation
+      type: object
+      properties:
+        query:
+          description: text the agent has already entered into the composer
+          type: string
+        message:
+          $ref: '#/components/schemas/Message'
+      example:
+        query: Hello, how can
+        message:
+          text: Hello, I would like to upgrade my internet plan to GOLD.
+          sender:
+            role: customer
+            externalId: customer-x
+          timestamp: '2023-06-01T19:16:55.706Z'
+    ForbiddenResponse:
+      description: Forbidden response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 403-01
+            message: Forbidden Response
+    NotFoundResponse:
+      description: Not Found response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 404-01
+            message: Not Found
+    Suggestions:
+      description: Suggestions for next agent message
+      type: object
+      properties:
+        id:
+          description: ID for the suggestions that were returned (to be used in analytics events)
+          type: string
+        message:
+          $ref: '#/components/schemas/MessagesResponse'
+        suggestions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Suggestion'
+        phraseCompletion:
+          $ref: '#/components/schemas/PhraseCompletion'
+        autopilotMessage:
+          $ref: '#/components/schemas/AutopilotMessage'
+    AutopilotStatus:
+      type: object
+      description: Autopilot status for an agent
+      properties:
+        enabled:
+          type: boolean
+          description: If true, autopilot is enabled
+      required:
+      - enabled
+      example:
+        enabled: true
+    Message:
+      description: Represents a single message within a conversation.
+      type: object
+      properties:
+        text:
+          type: string
+          minLength: 1
+          description: The content of the message.
+        sender:
+          $ref: '#/components/schemas/Participant'
+          description: Information about the participant who sent the message.
+        timestamp:
+          type: string
+          format: date-time
+          description: The time when the message was sent. Include the timezone, otherwise UTC will be assumed.
+      required:
+      - text
+      - sender
+      - timestamp
+      example:
+        text: Hello, I would like to upgrade my internet plan to GOLD.
+        sender:
+          role: agent
+          externalId: 123
+        timestamp: '2021-11-23T12:13:14.555Z'
+    NewCustomResponse:
+      type: object
+      properties:
+        text:
+          type: string
+          description: The text of the response
+        title:
+          type: string
+          description: The title of the response
+        folderId:
+          type: string
+          description: the ID of the folder the response belongs to (used for custom responses).
+        metadata:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: the name of this metadata item
+              allowedValues:
+                type: array
+                items:
+                  type: string
+                description: the list of allowed values for this metadata item
+          description: free-form metadata, in the form of a map of keys to lists of allowed values for each key, that can be added to any response. At least one of the values in the list for each key included  here must match what gets sent when requesting suggestions, so that responses can be filtered appropriately.
+      required:
+      - text
+      - title
+      example:
+        text: fold text
+        title: folder title
+        folderId: '123'
+    ServiceUnavailableResponse:
+      description: Service Unavailable response
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/DefaultErrorDetails'
+          example:
+            requestId: 8e033668-9f1a-11ec-b909-0242ac120002
+            code: 503-01
+            message: Service Unavailable
+  parameters:
+    agentId:
+      name: agentId
+      description: Identifier of the agent, data format is expected to be UUID
+      in: query
+      required: true
+      schema:
+        type: string
+    conversationId:
+      name: conversationId
+      description: The identifier for a conversation.
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: ^[A-Z0-9]+$
+    responseId:
+      name: responseId
+      description: Identifier of the response, data format is expected to be UUID
+      in: path
+      required: true
+      schema:
+        type: string
+    folderId:
+      name: folderId
+      description: Identifier of the folder, data format is expected to be UUID
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     API-ID:
       type: apiKey
