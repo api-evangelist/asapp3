@@ -1,0 +1,48 @@
+slug: asapp3
+provider: Asapp3
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: AutoSummary
+  spec_file: asapp3-autosummary-api-openapi.yml
+  capability_id: BC-430
+  capability_id_l1: BC-430
+  capability_name: Customer Service Management
+  confidence: 0.78
+  evidence: GET /autosummary/v1/intent/{conversationId} getIntent Get conversation intent; GET /autosummary/v1/free-text-summaries/{conversationId}
+    getFreeTextSummary Get free text summary
+  reason: Derives intent and summaries from customer-service conversations for contact-centre agents and
+    wrap-up. Clearly customer service management at L1; the evidence does not pin a single sub-capability
+    (inquiry handling vs contact-centre operations), so no L2 is asserted.
+- tag: AutoCompose
+  spec_file: asapp3-autocompose-api-openapi.yml
+  capability_id: BC-430.10
+  capability_id_l1: BC-430
+  capability_name: Customer Inquiry Management
+  confidence: 0.7
+  evidence: POST /autocompose/v1/conversations/{conversationId}/suggestions getSuggestions Generate suggestions;
+    GET /autocompose/v1/responses/globals getGlobalResponses List the global responses
+  reason: 'Agent-assist for contact-centre representatives: suggests the next message in a customer conversation
+    and manages reusable response libraries — handling and resolving customer contacts. Some ambiguity
+    between inquiry handling and contact-centre operations tooling, hence 0.7 on the L2.'
+- tag: Conversations
+  spec_file: asapp3-conversations-api-openapi.yml
+  capability_id: BC-430.10
+  capability_id_l1: BC-430
+  capability_name: Customer Inquiry Management
+  confidence: 0.7
+  evidence: POST /conversation/v1/conversations  Create or update a conversation; POST /conversation/v1/conversations/{conversationId}/messages  Create
+    a message; schemas Participant, Message
+  reason: The surface models customer-agent conversations and their messages on an enterprise contact-centre
+    CX platform, i.e. capture and handling of inbound customer contacts. Generic 'Conversations' naming
+    and the data-ingestion flavour keep confidence moderate.
