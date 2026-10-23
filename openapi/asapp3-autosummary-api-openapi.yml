@@ -710,3 +710,9 @@ x-tagGroups:
 - name: MG Autotranscribe API Router
   tags:
   - AutoTranscribe Media Gateway
+x-provenance:
+  method: harvested
+  publisher: Asapp3
+  source: https://docs.asapp.com/api-specs/openapi.yaml
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
