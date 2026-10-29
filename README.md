@@ -64,5 +64,153 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Asapp3 is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://equityzen.com/company/asapp3
+ASAPP (formerly Asapp3) is a leading AI‑powered customer experience platform for enterprise contact centers. It provides generative AI agents, human‑in‑the‑loop workflows, and real‑time interaction intelligence to automate and augment customer service across voice, digital and human channels. The platform integrates with existing systems, offers safety and security guardrails, and is backed by extensive AI research and patents, serving industries such as finance, healthcare, retail, and telecommunications.
+
+**Areas:** Artificial Intelligence · Customer Experience · Enterprise · Contact Center · Platform · Company
+
+## Asapp3 on APIs.io
+
+Everything profiled for Asapp3 is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/asapp3/](https://apis.io/providers/asapp3/)** — or go straight to one of the APIs or properties below.
+
+### APIs (10)
+
+- [Asapp3 Auto Compose API](https://apis.io/apis/asapp3/asapp3-autocompose-api/) — Improve agent productivity with AutoCompose API
+- [Asapp3 Auto Summary API](https://apis.io/apis/asapp3/asapp3-autosummary-api/) — Endpoints for summarizing conversations and retrieving structured data
+- [Asapp3 Auto Transcribe API](https://apis.io/apis/asapp3/asapp3-autotranscribe-api/) — Get streaming URL to transcribe audio
+- [Asapp3 AutoTranscribe Media Gateway API](https://apis.io/apis/asapp3/asapp3-autotranscribe-media-gateway-api/) — Operations for controlling AutoTranscribe Media Gateway transcription and streaming
+- [Asapp3 Conversations API](https://apis.io/apis/asapp3/asapp3-conversations-api/) — Operations to send conversational inputs to ASAPP AI services
+- [Asapp3 File Exporter API](https://apis.io/apis/asapp3/asapp3-file-exporter-api/) — API to get client exports
+- [Asapp3 Generative Agent API](https://apis.io/apis/asapp3/asapp3-generativeagent-api/) — Operations to send messages and trigger GenerativeAgent to respond or query the current state
+- [Asapp3 Health Check API](https://apis.io/apis/asapp3/asapp3-health-check-api/) — Operations to ensure that ASAPP APIs are up and running.
+- [Asapp3 Knowledge Base API](https://apis.io/apis/asapp3/asapp3-knowledge-base-api/) — Operations to submit and retrieve Articles to the GenerativeAgent Knowledge Base.
+- [Asapp3 Metadata API](https://apis.io/apis/asapp3/asapp3-metadata-api/) — API to submit entity's attributes to ASAPP
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Asapp3 Webhooks](https://apis.io/asyncapis/asapp3/asapp3-webhooks/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Asapp3 Agentic Access](https://apis.io/agentic-access/asapp3/asapp3-agentic-access/)
+
+#### JSON Schema (6)
+
+The data models the API reads and writes.
+
+- [AgentMetadata](https://apis.io/schemas/asapp3/asapp3-agent-metadata/)
+- [Article](https://apis.io/schemas/asapp3/asapp3-article/)
+- [ConversationMetadata](https://apis.io/schemas/asapp3/asapp3-conversation-metadata/)
+- [MessageAnalyticEvent](https://apis.io/schemas/asapp3/asapp3-message-analytic-event/)
+- [MessageSentEvent](https://apis.io/schemas/asapp3/asapp3-message-sent-event/)
+- [SubmissionRequest](https://apis.io/schemas/asapp3/asapp3-submission-request/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Asapp3 Context](https://apis.io/jsonld/asapp3/asapp3-context/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Asapp3 Openapi Overlay](https://apis.io/overlays/asapp3/asapp3-openapi-overlay/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Asapp3 API Rules](https://apis.io/rules/asapp3/asapp3-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Asapp3 Authentication](https://apis.io/security/asapp3/asapp3-authentication/)
+- [Asapp3 Domain Security](https://apis.io/security/asapp3/asapp3-domain-security/)
+- [Asapp3 Trust Center](https://apis.io/security/asapp3/asapp3-trust-center/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Asapp3 Rate Limits](https://apis.io/rate-limits/asapp3/asapp3-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.asapp.com)
+- [Documentation](https://developer.asapp.com/)
+- [Getting started](https://docs.asapp.com/generativeagent/getting-started)
+- [API reference](https://docs.asapp.com/llms.txt)
+- [Support](https://support.asapp.com/hc/en-us)
+- [Changelog](https://docs.asapp.com/releases/overview)
+- [Blog](https://www.asapp.com/blog)
+- [Compliance](https://trust.asapp.com/)
+- [Privacy policy](https://www.asapp.com/privacy-policy)
+- [GitHub](https://github.com/asappinc)
+- [Status](https://status.asapp.com/access/login)
+
+## API Evangelist rating
+
+**Kin Score 60.2** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 71.2 |
+| Contract governance | 35.6 |
+| Operational transparency | 76.3 |
+| Developer ergonomics | 49.4 |
+| Access clarity | 26.3 |
+
+**Agent readiness 32.1** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 23.6** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/asapp3/](https://apis.io/providers/asapp3/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Asapp3: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/asapp3/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
